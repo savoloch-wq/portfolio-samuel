@@ -127,6 +127,14 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;ali
   .cs-meta-item:last-child{border-bottom:none;}
   .cs-grid-2{grid-template-columns:1fr;}
 }
+
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--y);}
+.nav-status{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--dim);display:flex;align-items:center;gap:7px;}
+.blink{width:5px;height:5px;border-radius:50%;background:var(--y);animation:blink 1.4s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@media(max-width:768px){.nav-links{display:none;}}
 </style>
 </head>
 <body>
@@ -140,7 +148,13 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;ali
 
 <nav>
   <a href="index.html" class="nav-logo">SAMUEL V.</a>
-  <a href="index.html#work" class="nav-back">← Retour aux projets</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Travaux</a></li>
+    <li><a href="index.html#about">À propos</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank">Mon CV</a></li>
+  </ul>
+  <div class="nav-status"><div class="blink"></div><span>Disponible</span></div>
 </nav>
 
 <div class="page">
@@ -247,7 +261,7 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;ali
     <div class="cs-section-num">04</div>
     <div class="cs-section-title">Solution — Version mobile</div>
     <p class="cs-section-body">
-      Sur mobile, j'ai introduit un menu déroulant pour obtenir un premier aperçu des services sans surcharger la page. En cliquant, l'utilisateur accède à une description détailléefonctionnalité et esthétisme réunis pour une navigation épurée.
+      Sur mobile, j'ai introduit un menu déroulant pour obtenir un premier aperçu des services sans surcharger la page. En cliquant, l'utilisateur accède à une description détaillée — fonctionnalité et esthétisme réunis pour une navigation épurée.
     </p>
     <div class="cs-grid-2">
       <img src="Omni mobile.png" alt="Page services omnicanaux Courir — version mobile finale">
