@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RER : De la Frustration à la Fluidité · Samuel V.</title>
+<meta name="description" content="Semaine Emotion Design — Projet UX sur l'expérience sensorielle dans le RER A. Recherche utilisateur, storyboard, application mobile et maquette physique.">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'VCR OSD Mono';src:url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff') format('woff');}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--y:#FBEF0C;--bg:#080808;--card:#101010;--card2:#141414;--white:#F0EDE4;--dim:rgba(240,237,228,0.45);--mono:'VCR OSD Mono','Courier New',monospace;--sans:'Work Sans','Arial',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;cursor:none;}
+#bg{position:fixed;inset:0;z-index:0;background-color:#0d0d0d;}
+#bg::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");opacity:0.18;animation:snow .08s steps(1) infinite;}
+@keyframes snow{0%{transform:translate(0,0);}10%{transform:translate(-3%,-4%);}20%{transform:translate(4%,2%);}30%{transform:translate(-2%,5%);}40%{transform:translate(3%,-3%);}50%{transform:translate(-5%,1%);}60%{transform:translate(2%,4%);}70%{transform:translate(-4%,-2%);}80%{transform:translate(5%,3%);}90%{transform:translate(-1%,-5%);}100%{transform:translate(3%,2%);}}
+#scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 2px,rgba(0,0,0,0.10) 2px,rgba(0,0,0,0.10) 4px);}
+#vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 20%,rgba(0,0,0,0.65) 100%);}
+#glitch-el{position:fixed;left:0;right:0;height:1px;background:rgba(251,239,12,0.5);z-index:4;pointer-events:none;opacity:0;}
+#cur{position:fixed;width:8px;height:8px;background:var(--y);border-radius:50%;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+#cur-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(251,239,12,0.4);border-radius:50%;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+
+nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;border-bottom:0.5px solid rgba(251,239,12,0.08);backdrop-filter:blur(8px);background:rgba(8,8,8,0.75);}
+.nav-logo{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;color:var(--white);text-decoration:none;}
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--y);}
+.nav-status{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--dim);display:flex;align-items:center;gap:7px;}
+.blink{width:5px;height:5px;border-radius:50%;background:var(--y);animation:blink 1.4s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.page{position:relative;z-index:10;max-width:900px;margin:0 auto;padding:120px 60px 100px;}
+
+.cs-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.5);margin-bottom:16px;opacity:0;animation:up .5s .1s ease forwards;}
+.cs-title{font-family:var(--sans);font-size:clamp(32px,4.5vw,52px);font-weight:700;letter-spacing:-0.02em;line-height:1.05;color:var(--white);margin-bottom:20px;opacity:0;animation:up .6s .25s ease forwards;}
+.cs-title em{font-style:normal;color:var(--y);}
+.cs-intro{font-size:16px;font-weight:300;color:var(--dim);line-height:1.75;max-width:660px;margin-bottom:40px;opacity:0;animation:up .6s .4s ease forwards;}
+@keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.cs-meta{display:flex;gap:0;margin-bottom:56px;border:1px solid rgba(251,239,12,0.1);opacity:0;animation:up .5s .55s ease forwards;}
+.cs-meta-item{flex:1;padding:20px 24px;border-right:1px solid rgba(251,239,12,0.1);}
+.cs-meta-item:last-child{border-right:none;}
+.cs-meta-label{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:8px;}
+.cs-meta-val{font-family:var(--mono);font-size:12px;color:var(--white);}
+
+.cs-section{margin-bottom:56px;}
+.cs-section-num{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:10px;}
+.cs-section-title{font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:18px;}
+.cs-section-body{font-size:15px;font-weight:300;color:var(--dim);line-height:1.8;}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px;}
+.stat-card{background:var(--card);border:1px solid rgba(251,239,12,0.12);padding:22px 18px;}
+.stat-num{font-family:var(--sans);font-size:32px;font-weight:700;color:var(--y);margin-bottom:8px;line-height:1;}
+.stat-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--dim);line-height:1.5;}
+
+/* QUOTE */
+.cs-quote{border-left:2px solid var(--y);padding:16px 24px;margin-top:24px;background:rgba(251,239,12,0.03);}
+.cs-quote p{font-size:14px;font-style:italic;color:var(--dim);line-height:1.7;}
+.cs-quote cite{font-family:var(--mono);font-size:10px;color:rgba(251,239,12,0.4);margin-top:8px;display:block;font-style:normal;letter-spacing:0.1em;}
+
+/* QUOTES GRID */
+.quotes-grid{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
+.quote-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);padding:20px 24px;}
+.quote-text{font-size:13px;color:var(--white);line-height:1.6;margin-bottom:8px;}
+.quote-author{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:rgba(251,239,12,0.4);}
+
+/* DÉCOUVERTES */
+.findings-grid{display:flex;flex-direction:column;gap:10px;margin-top:24px;}
+.finding{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;background:var(--card);border:1px solid rgba(255,255,255,0.05);}
+.finding-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.finding-body{}
+.finding-title{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
+.finding-text{font-size:13px;color:var(--dim);line-height:1.6;}
+
+/* SOLUTION CARDS */
+.solution-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px;}
+.sol-card{background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:24px 20px;}
+.sol-num{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;color:rgba(251,239,12,0.4);margin-bottom:12px;}
+.sol-title{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:10px;}
+.sol-text{font-size:12px;color:var(--dim);line-height:1.65;}
+
+/* STEPS APP */
+.steps-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px;}
+.step-card{background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:20px;}
+.step-num{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--y);margin-bottom:12px;}
+.step-title{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);margin-bottom:8px;}
+.step-text{font-size:12px;color:var(--dim);line-height:1.6;}
+
+/* CHIPS */
+.cs-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.cs-chip{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;border:0.5px solid rgba(251,239,12,0.2);color:rgba(251,239,12,0.55);padding:7px 14px;}
+
+.cs-divider{border:none;border-top:0.5px solid rgba(251,239,12,0.08);margin:56px 0;}
+.cs-nav-proj{display:flex;justify-content:space-between;align-items:center;}
+.cs-nav-link{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+.cs-nav-link:hover{color:var(--y);}
+.cs-nav-label{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(251,239,12,0.35);margin-bottom:4px;}
+
+#float-contact{position:fixed;bottom:32px;right:32px;z-index:200;font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#080808;background:var(--y);border:none;padding:13px 22px;border-radius:100px;text-decoration:none;cursor:pointer;transition:transform .2s;box-shadow:0 4px 24px rgba(251,239,12,0.18);}
+#float-contact:hover{transform:translateY(-2px);}
+
+@media(max-width:768px){
+  nav{padding:0 24px;}.nav-links{display:none;}
+  .page{padding:100px 24px 80px;}
+  .cs-meta{flex-direction:column;}.cs-meta-item{border-right:none;border-bottom:1px solid rgba(251,239,12,0.1);}.cs-meta-item:last-child{border-bottom:none;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .solution-grid,.steps-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="bg"></div>
+<div id="scanlines"></div>
+<div id="vignette"></div>
+<div id="glitch-el"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">SAMUEL V.</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Travaux</a></li>
+    <li><a href="index.html#about">À propos</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank">Mon CV</a></li>
+  </ul>
+  <div class="nav-status"><div class="blink"></div><span>Disponible</span></div>
+</nav>
+
+<div class="page">
+
+  <div class="cs-tag">UX Design · Emotion Design · Mastère · 2024</div>
+  <h1 class="cs-title">RER : De la Frustration<br>à la <em>Fluidité</em></h1>
+  <p class="cs-intro">Une expérience sensorielle au service du transport. Comment transformer le chaos du RER A en un moment fluide et serein — en une semaine, en équipe de trois.</p>
+
+  <div class="cs-meta">
+    <div class="cs-meta-item"><div class="cs-meta-label">Contexte</div><div class="cs-meta-val">Semaine Emotion Design</div></div>
+    <div class="cs-meta-item"><div class="cs-meta-label">Type</div><div class="cs-meta-val">UX Research · Concept</div></div>
+    <div class="cs-meta-item"><div class="cs-meta-label">Année</div><div class="cs-meta-val">Mastère A4</div></div>
+  </div>
+
+  <!-- LIEN PRÉSENTATION -->
+  <div style="margin-bottom:56px;">
+    <a href="https://www.figma.com/deck/yVwqsxfq33m31zKVQMxbCh/RER---De-la-Frustration-%C3%A0-la-Fluidit%C3%A9?node-id=1-105&t=pB1mZ3olBzs2Y3Ib-1" target="_blank" class="pres-btn">Voir la présentation Figma</a>
+    <style>.pres-btn{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#080808;background:var(--y);padding:16px 32px;text-decoration:none;border-radius:100px;transition:background .2s,color .2s,transform .15s;}.pres-btn:hover{opacity:0.85;transform:translateY(-2px);}</style>
+  </div>
+
+  <!-- CONTEXTE -->
+  <div class="cs-section">
+    <div class="cs-section-num">01</div>
+    <div class="cs-section-title">Une réalité quotidienne</div>
+    <p class="cs-section-body">Le RER A transporte des millions de voyageurs chaque jour dans des conditions souvent stressantes. Notre équipe a décidé de s'attaquer à un problème concret et quotidien : transformer cette expérience chaotique en quelque chose de fluide et humain.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">1.2M</div>
+        <div class="stat-label">voyageurs par jour sur le RER A</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">20 min</div>
+        <div class="stat-label">perdues en moyenne dans la cohue aux heures de pointe</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">72%</div>
+        <div class="stat-label">des usagers déclarent ressentir du stress lors de leur trajet</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">trains manqués en moyenne par semaine et par usager</div>
+      </div>
+    </div>
+
+    <div class="cs-quote" style="margin-top:24px;">
+      <p>« Je suis petite, quand les portes s'ouvrent, c'est violent. Les gens poussent, personne ne respecte rien. J'ai déjà eu des crises d'angoisse tellement c'est stressant. »</p>
+      <cite>— Utilisatrice interrogée lors de nos recherches</cite>
+    </div>
+  </div>
+
+  <!-- RECHERCHE -->
+  <div class="cs-section">
+    <div class="cs-section-num">02</div>
+    <div class="cs-section-title">Phase de recherche — Entretiens utilisateurs</div>
+    <p class="cs-section-body">Nous avons mené des entretiens avec des usagers réguliers du RER pour identifier les points de friction réels. Les verbatims révèlent une anxiété profonde liée à la densité et à l'imprévisibilité.</p>
+
+    <div class="quotes-grid">
+      <div class="quote-item">
+        <div class="quote-text">« Les gens forcent, forcent, et tu ne peux plus bouger... ça crée des malaises. »</div>
+        <div class="quote-author">— Utilisateur 2</div>
+      </div>
+      <div class="quote-item">
+        <div class="quote-text">« J'utilise Citymapper pour savoir quelle sortie prendre, sinon je perds du temps à chercher ou je me retrouve à faire un détour. »</div>
+        <div class="quote-author">— Utilisateur 3</div>
+      </div>
+      <div class="quote-item">
+        <div class="quote-text">« Il y a beaucoup de malaises voyageurs, à force d'être compressés, on a même du mal à respirer. »</div>
+        <div class="quote-author">— Utilisatrice 4</div>
+      </div>
+    </div>
+
+    <div class="findings-grid" style="margin-top:24px;">
+      <div class="finding">
+        <div class="finding-dot" style="background:#4A6FE8;"></div>
+        <div class="finding-body">
+          <div class="finding-title">Anticipation des sorties</div>
+          <div class="finding-text">Utilisation de Citymapper pour choisir la bonne sortie et éviter les détours — un besoin non couvert par les outils officiels.</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-dot" style="background:#E84A4A;"></div>
+        <div class="finding-body">
+          <div class="finding-title">Anxiété et saturation</div>
+          <div class="finding-text">Forte densité → sensation d'oppression et stress. Tension palpable aux heures de pointe.</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-dot" style="background:#4AE87A;"></div>
+        <div class="finding-body">
+          <div class="finding-title">Bouchons en montée / descente</div>
+          <div class="finding-text">Blocages aux portes et escaliers → ralentissement du flux. Montées forcées, descentes difficiles.</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-dot" style="background:#E8A84A;"></div>
+        <div class="finding-body">
+          <div class="finding-title">Conséquences sur les voyageurs</div>
+          <div class="finding-text">Peur de rater sa station, malaises fréquents. Certains préfèrent attendre le train suivant pour éviter la foule.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-chips">
+      <div class="cs-chip">Entretiens utilisateurs</div>
+      <div class="cs-chip">Analyse des flux</div>
+      <div class="cs-chip">Étude de cas Charles-de-Gaulle Étoile</div>
+      <div class="cs-chip">Storyboard</div>
+    </div>
+  </div>
+
+  <!-- QUESTION -->
+  <div class="cs-section">
+    <div class="cs-section-num">03</div>
+    <div class="cs-section-title">La question de design</div>
+    <div class="cs-quote">
+      <p>« Comment transformer l'expérience chaotique et stressante du RER en un moment fluide et serein ? »</p>
+    </div>
+  </div>
+
+  <!-- SOLUTION -->
+  <div class="cs-section">
+    <div class="cs-section-num">04</div>
+    <div class="cs-section-title">Notre solution — Une symphonie sensorielle</div>
+    <p class="cs-section-body">Une approche globale combinant technologie et design émotionnel — agir sur trois leviers simultanément pour transformer l'expérience à chaque point de contact.</p>
+
+    <div class="solution-grid">
+      <div class="sol-card">
+        <div class="sol-num">I</div>
+        <div class="sol-title">Indicateurs visuels</div>
+        <div class="sol-text">Lignes de guidage au sol, signalétique dynamique en temps réel, capteurs de mouvement et algorithme prédictif pour anticiper les flux et adapter la signalisation.</div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">II</div>
+        <div class="sol-title">Design sensoriel</div>
+        <div class="sol-text">Ambiances sonores apaisantes, signaux directionnels audio, diffuseurs d'odeur pour créer un sentiment de sérénité et influencer le comportement de déplacement.</div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">III</div>
+        <div class="sol-title">Application connectée</div>
+        <div class="sol-text">Subway Mapper — une app qui détecte le trajet, recommande le wagon optimal et guide l'utilisateur vers la meilleure place en 3 étapes simples.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div class="cs-section">
+    <div class="cs-section-num">05</div>
+    <div class="cs-section-title">Subway Mapper — Parcours utilisateur</div>
+    <p class="cs-section-body">L'application s'intègre dans le trajet de façon non intrusive — elle détecte automatiquement le nouveau trajet et guide l'utilisateur en 3 étapes.</p>
+
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-title">Nouveau trajet</div>
+        <div class="step-text">L'app détecte que l'utilisateur effectue un nouveau trajet. Il saisit sa destination depuis La Défense et valide.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-title">Recommandation wagon</div>
+        <div class="step-text">Une notification push recommande le wagon 8, situé à l'avant du train — pendant que la musique continue de jouer.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-title">Place trouvée</div>
+        <div class="step-text">Carte du train en temps réel, indication du wagon recommandé, bouton "Plus de places" pour explorer les alternatives.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;border:1px solid rgba(251,239,12,0.08);overflow:hidden;">
+      <img src="Container.png" alt="Maquettes Subway Mapper — Step 1, Step 2, Step 3" style="width:100%;height:auto;display:block;">
+    </div>
+  </div>
+
+  <!-- MAQUETTE -->
+  <div class="cs-section">
+    <div class="cs-section-num">06</div>
+    <div class="cs-section-title">Maquette physique</div>
+    <p class="cs-section-body">Pour rendre la solution tangible, nous avons construit une maquette physique de la station — quai, train, signalétique — pour présenter et tester le concept de manière concrète lors de la restitution.</p>
+
+    <div class="cs-chips">
+      <div class="cs-chip">Prototypage rapide</div>
+      <div class="cs-chip">Maquette physique</div>
+      <div class="cs-chip">Présentation concept</div>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <div class="cs-nav-proj">
+    <a href="projet-asaprocky.html" class="cs-nav-link">← Projet précédent</a>
+    <a href="#" class="cs-nav-link">
+      <div style="text-align:right;">
+        <div class="cs-nav-label">Projet suivant</div>
+        <div>Application mobile →</div>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<a href="mailto:s.a.voloch@gmail.com" id="float-contact">Me contacter</a>
+
+<script>
+(function(){
+const glEl=document.getElementById('glitch-el');
+let glT=300;
+function fireGlitch(){glEl.style.top=(window.innerHeight*(0.15+Math.random()*0.7))+'px';glEl.style.opacity='1';setTimeout(()=>{glEl.style.opacity='0';},40+Math.random()*100);}
+(function loop(){if(--glT<=0&&Math.random()<0.012){fireGlitch();glT=200+Math.floor(Math.random()*300);}requestAnimationFrame(loop);})();
+const cur=document.getElementById('cur');
+const ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function lc(){rx+=(mx-rx)*0.11;ry+=(my-ry)*0.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lc);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='13px';cur.style.height='13px';ring.style.width='44px';ring.style.height='44px';ring.style.borderColor='rgba(251,239,12,0.7)';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(251,239,12,0.4)';});
+});
+document.addEventListener('mouseleave',()=>{cur.style.opacity='0';ring.style.opacity='0';});
+document.addEventListener('mouseenter',()=>{cur.style.opacity='1';ring.style.opacity='1';});
+})();
+</script>
+</body>
+</html>
