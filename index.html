@@ -68,8 +68,20 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;ali
 .proj-desc{font-family:var(--mono);font-size:11px;color:rgba(240,237,228,0.32);line-height:1.7;margin-bottom:18px;}
 .proj-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px;}
 .proj-year{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.18);}
+.proj-credit{position:absolute;bottom:8px;right:10px;font-family:var(--mono);font-size:8px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);}
+.scroll-hint{display:flex;align-items:center;gap:10px;margin-top:16px;justify-content:flex-end;}
+.scroll-hint-text{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(240,237,228,0.3);text-transform:uppercase;}
+.scroll-hint-arrows{display:flex;gap:6px;}
+.scroll-hint-btn{width:28px;height:28px;border:0.5px solid rgba(251,239,12,0.25);background:transparent;color:rgba(251,239,12,0.5);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s,color .15s;font-family:var(--mono);}
+.scroll-hint-btn:hover{border-color:var(--y);color:var(--y);}
 .proj-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--y);opacity:0;transition:opacity .2s;}
-.proj-card:hover .proj-cta{opacity:1;}
+.proj-card:hover .proj-credit{position:absolute;bottom:8px;right:10px;font-family:var(--mono);font-size:8px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);}
+.scroll-hint{display:flex;align-items:center;gap:10px;margin-top:16px;justify-content:flex-end;}
+.scroll-hint-text{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(240,237,228,0.3);text-transform:uppercase;}
+.scroll-hint-arrows{display:flex;gap:6px;}
+.scroll-hint-btn{width:28px;height:28px;border:0.5px solid rgba(251,239,12,0.25);background:transparent;color:rgba(251,239,12,0.5);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s,color .15s;font-family:var(--mono);}
+.scroll-hint-btn:hover{border-color:var(--y);color:var(--y);}
+.proj-cta{opacity:1;}
 #xp{border-top:0.5px solid rgba(251,239,12,0.08);}
 .xp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .xp-card{background:var(--card);border:1px solid rgba(251,239,12,0.12);padding:28px 30px;}
@@ -148,7 +160,7 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
       <a class="proj-card" href="projet-courir.html">
         <div class="proj-thumb">
           <span class="proj-num">01</span>
-          <div class="ph"><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:30px;grid-column:span 2"></div></div>
+          <img src="Mockup Courir.png" alt="Refonte tunnel d'achat Courir" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div class="proj-body">
           <div class="proj-tag">E-Commerce · UX Research</div>
@@ -161,7 +173,7 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
       <a class="proj-card" href="projet-asaprocky.html">
         <div class="proj-thumb">
           <span class="proj-num">02</span>
-          <div class="ph"><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:30px;grid-column:span 2"></div></div>
+          <img src="image 22.png" alt="Site interactif ASAP Rocky" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div class="proj-body">
           <div class="proj-tag">Site interactif · Direction artistique</div>
@@ -174,7 +186,7 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
       <a class="proj-card" href="projet-rer.html">
         <div class="proj-thumb">
           <span class="proj-num">03</span>
-          <div class="ph"><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:30px;grid-column:span 2"></div></div>
+          <img src="Container.png" alt="RER De la Frustration à la Fluidité" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div class="proj-body">
           <div class="proj-tag">UX Research · Emotion Design</div>
@@ -187,7 +199,8 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
       <a class="proj-card" href="projet-design-systemique.html">
         <div class="proj-thumb">
           <span class="proj-num">04</span>
-          <div class="ph"><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:30px;grid-column:span 2"></div></div>
+          <img src="mila-okta-safitri-QBdipcCUViI-unsplash.png" alt="Design Systémique — partage d'objets" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <span class="proj-credit">Photo · Unsplash</span>
         </div>
         <div class="proj-body">
           <div class="proj-tag">Design Systémique · UX Research</div>
@@ -210,6 +223,13 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
         </div>
       </a>
 
+    </div>
+    <div class="scroll-hint">
+      <span class="scroll-hint-text">Défiler</span>
+      <div class="scroll-hint-arrows">
+        <button class="scroll-hint-btn" id="sh-prev" aria-label="Précédent">←</button>
+        <button class="scroll-hint-btn" id="sh-next" aria-label="Suivant">→</button>
+      </div>
     </div>
   </section>
 
