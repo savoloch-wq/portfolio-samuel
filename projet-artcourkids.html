@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art Coeur Kids · Samuel V.</title>
+<meta name="description" content="Application mobile d'art thérapie pour les enfants hospitalisés — design créatif, ludique et féerique, stratégie marketing et prototype interactif.">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'VCR OSD Mono';src:url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff') format('woff');}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--y:#FBEF0C;--bg:#080808;--card:#101010;--card2:#141414;--white:#F0EDE4;--dim:rgba(240,237,228,0.45);--mono:'VCR OSD Mono','Courier New',monospace;--sans:'Work Sans','Arial',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;cursor:none;}
+#bg{position:fixed;inset:0;z-index:0;background-color:#0d0d0d;}
+#bg::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");opacity:0.18;animation:snow .08s steps(1) infinite;}
+@keyframes snow{0%{transform:translate(0,0);}10%{transform:translate(-3%,-4%);}20%{transform:translate(4%,2%);}30%{transform:translate(-2%,5%);}40%{transform:translate(3%,-3%);}50%{transform:translate(-5%,1%);}60%{transform:translate(2%,4%);}70%{transform:translate(-4%,-2%);}80%{transform:translate(5%,3%);}90%{transform:translate(-1%,-5%);}100%{transform:translate(3%,2%);}}
+#scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 2px,rgba(0,0,0,0.10) 2px,rgba(0,0,0,0.10) 4px);}
+#vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 20%,rgba(0,0,0,0.65) 100%);}
+#glitch-el{position:fixed;left:0;right:0;height:1px;background:rgba(251,239,12,0.5);z-index:4;pointer-events:none;opacity:0;}
+#cur{position:fixed;width:8px;height:8px;background:var(--y);border-radius:50%;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+#cur-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(251,239,12,0.4);border-radius:50%;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+
+nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;border-bottom:0.5px solid rgba(251,239,12,0.08);backdrop-filter:blur(8px);background:rgba(8,8,8,0.75);}
+.nav-logo{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;color:var(--white);text-decoration:none;}
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--y);}
+.nav-status{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--dim);display:flex;align-items:center;gap:7px;}
+.blink{width:5px;height:5px;border-radius:50%;background:var(--y);animation:blink 1.4s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.page{position:relative;z-index:10;max-width:900px;margin:0 auto;padding:120px 60px 100px;}
+
+.cs-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.5);margin-bottom:16px;opacity:0;animation:up .5s .1s ease forwards;}
+.cs-title{font-family:var(--sans);font-size:clamp(32px,4.5vw,52px);font-weight:700;letter-spacing:-0.02em;line-height:1.05;color:var(--white);margin-bottom:20px;opacity:0;animation:up .6s .25s ease forwards;}
+.cs-title em{font-style:normal;color:var(--y);}
+.cs-intro{font-size:16px;font-weight:300;color:var(--dim);line-height:1.75;max-width:660px;margin-bottom:40px;opacity:0;animation:up .6s .4s ease forwards;}
+@keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.cs-meta{display:flex;gap:0;margin-bottom:48px;border:1px solid rgba(251,239,12,0.1);opacity:0;animation:up .5s .55s ease forwards;}
+.cs-meta-item{flex:1;padding:20px 24px;border-right:1px solid rgba(251,239,12,0.1);}
+.cs-meta-item:last-child{border-right:none;}
+.cs-meta-label{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:8px;}
+.cs-meta-val{font-family:var(--mono);font-size:12px;color:var(--white);}
+
+/* BOUTON PROTO */
+.proto-wrap{display:flex;flex-direction:column;gap:10px;margin-bottom:56px;}
+.sound-warning{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(251,239,12,0.6);display:flex;align-items:center;gap:8px;}
+.sound-warning::before{content:'🔊';}
+.pres-btn{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#080808;background:var(--y);padding:16px 32px;text-decoration:none;border-radius:100px;transition:opacity .2s,transform .15s;}
+.pres-btn:hover{opacity:0.85;transform:translateY(-2px);}
+
+.cs-section{margin-bottom:56px;}
+.cs-section-num{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:10px;}
+.cs-section-title{font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:18px;}
+.cs-section-body{font-size:15px;font-weight:300;color:var(--dim);line-height:1.8;}
+
+/* VALEURS */
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px;}
+.value-card{background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:20px 16px;text-align:center;}
+.value-icon{font-size:22px;margin-bottom:10px;}
+.value-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);line-height:1.4;}
+
+/* CIBLES */
+.target-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.target-card{background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:22px 20px;}
+.target-title{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(251,239,12,0.5);margin-bottom:10px;}
+.target-text{font-size:13px;color:var(--dim);line-height:1.7;}
+
+/* MARKETING */
+.mkt-list{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.mkt-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);padding:16px 20px;display:flex;gap:12px;}
+.mkt-arrow{font-family:var(--mono);font-size:13px;color:var(--y);flex-shrink:0;}
+.mkt-text{font-size:13px;color:var(--dim);line-height:1.65;}
+.mkt-text strong{color:var(--white);font-weight:500;}
+
+.cs-quote{border-left:2px solid var(--y);padding:16px 24px;margin-top:24px;background:rgba(251,239,12,0.03);}
+.cs-quote p{font-size:14px;font-style:italic;color:var(--dim);line-height:1.7;}
+
+.cs-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.cs-chip{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;border:0.5px solid rgba(251,239,12,0.2);color:rgba(251,239,12,0.55);padding:7px 14px;}
+
+.cs-divider{border:none;border-top:0.5px solid rgba(251,239,12,0.08);margin:56px 0;}
+.cs-nav-proj{display:flex;justify-content:space-between;align-items:center;}
+.cs-nav-link{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+.cs-nav-link:hover{color:var(--y);}
+.cs-nav-label{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(251,239,12,0.35);margin-bottom:4px;}
+
+#float-contact{position:fixed;bottom:32px;right:32px;z-index:200;font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#080808;background:var(--y);border:none;padding:13px 22px;border-radius:100px;text-decoration:none;cursor:pointer;transition:opacity .2s,transform .15s;box-shadow:0 4px 24px rgba(251,239,12,0.18);}
+#float-contact:hover{opacity:0.85;transform:translateY(-2px);}
+
+@media(max-width:768px){
+  nav{padding:0 24px;}.nav-links{display:none;}
+  .page{padding:100px 24px 80px;}
+  .cs-meta{flex-direction:column;}.cs-meta-item{border-right:none;border-bottom:1px solid rgba(251,239,12,0.1);}.cs-meta-item:last-child{border-bottom:none;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .target-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="bg"></div>
+<div id="scanlines"></div>
+<div id="vignette"></div>
+<div id="glitch-el"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">SAMUEL V.</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Travaux</a></li>
+    <li><a href="index.html#about">À propos</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank">Mon CV</a></li>
+  </ul>
+  <div class="nav-status"><div class="blink"></div><span>Disponible</span></div>
+</nav>
+
+<div class="page">
+
+  <div class="cs-tag">UI Design · Application mobile · Stratégie marketing</div>
+  <h1 class="cs-title">Art Coeur Kids —<br><em>L'art thérapie</em><br>pour les enfants</h1>
+  <p class="cs-intro">Concevoir une application mobile créative, ludique et féerique pour sortir les enfants hospitalisés de leur isolement et leur donner la force d'affronter leur maladie.</p>
+
+  <div class="cs-meta">
+    <div class="cs-meta-item"><div class="cs-meta-label">Client</div><div class="cs-meta-val">Art Coeur Kids</div></div>
+    <div class="cs-meta-item"><div class="cs-meta-label">Type</div><div class="cs-meta-val">UI Design · App mobile</div></div>
+    <div class="cs-meta-item"><div class="cs-meta-label">Cible</div><div class="cs-meta-val">Enfants 3–11 ans</div></div>
+    <div class="cs-meta-item"><div class="cs-meta-label">Livrables</div><div class="cs-meta-val">Prototype · Stratégie</div></div>
+  </div>
+
+  <div class="proto-wrap">
+    <span class="sound-warning">Attention au son — le prototype contient de l'audio</span>
+    <a href="https://www.figma.com/proto/9MkLE0aGBhgn6a4RQmTjZw/Art-Coeur?page-id=1%3A288&node-id=177-15444&viewport=3000%2C-369%2C0.16&scaling=scale-down&starting-point-node-id=177%3A15444&show-proto-sidebar=1&t=eIP1hjRfBPzm7fLv-1" target="_blank" class="pres-btn">Voir le prototype Figma</a>
+  </div>
+
+  <!-- CONTEXTE -->
+  <div class="cs-section">
+    <div class="cs-section-num">01</div>
+    <div class="cs-section-title">Le contexte</div>
+    <p class="cs-section-body">Art Coeur Kids propose des séances d'art thérapie pour les enfants hospitalisés ou à domicile. La mission : sortir l'enfant de son isolement et lui donner la force d'affronter sa maladie à travers la créativité.<br><br>La demande : concevoir un design créatif, innovant, ludique et féerique, allié à une stratégie marketing et communication cohérente.</p>
+  </div>
+
+  <!-- OBJECTIF -->
+  <div class="cs-section">
+    <div class="cs-section-num">02</div>
+    <div class="cs-section-title">Objectif</div>
+    <div class="cs-quote">
+      <p>Créer un univers graphique créatif, innovant, ludique et féerique qui donne envie aux enfants de 3 à 11 ans d'explorer l'art thérapie tout en s'amusant.</p>
+    </div>
+  </div>
+
+  <!-- VALEURS AJOUTÉES -->
+  <div class="cs-section">
+    <div class="cs-section-num">03</div>
+    <div class="cs-section-title">Valeurs ajoutées</div>
+    <p class="cs-section-body">L'application propose une expérience riche pensée pour capter l'attention des enfants et les garder engagés.</p>
+    <div class="values-grid">
+      <div class="value-card"><div class="value-icon">🎮</div><div class="value-label">Parcours interactif gamifié</div></div>
+      <div class="value-card"><div class="value-icon">🃏</div><div class="value-label">Déblocage de cartes</div></div>
+      <div class="value-card"><div class="value-icon">👥</div><div class="value-label">Mode multijoueurs</div></div>
+      <div class="value-card"><div class="value-icon">🧩</div><div class="value-label">Jeux et quizz</div></div>
+      <div class="value-card"><div class="value-icon">🌍</div><div class="value-label">Mon monde</div></div>
+      <div class="value-card"><div class="value-icon">🎵</div><div class="value-label">Audio guide et musique</div></div>
+      <div class="value-card"><div class="value-icon">✨</div><div class="value-label">Réalité augmentée</div></div>
+      <div class="value-card"><div class="value-icon">📱</div><div class="value-label">Multi-plateforme</div></div>
+    </div>
+  </div>
+
+  <!-- CIBLES -->
+  <div class="cs-section">
+    <div class="cs-section-num">04</div>
+    <div class="cs-section-title">Cibles</div>
+    <div class="target-grid">
+      <div class="target-card">
+        <div class="target-title">Cible principale</div>
+        <div class="target-text">Enfants de 3 à 11 ans, hospitalisés ou en soin à domicile. L'interface doit être intuitive, colorée et adaptée à chaque tranche d'âge.</div>
+      </div>
+      <div class="target-card">
+        <div class="target-title">Cible secondaire</div>
+        <div class="target-text">Les parents — prescripteurs et décideurs du téléchargement. La stratégie marketing les cible directement via Facebook, Instagram et LinkedIn.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRATÉGIE MARKETING -->
+  <div class="cs-section">
+    <div class="cs-section-num">05</div>
+    <div class="cs-section-title">Stratégie marketing</div>
+    <p class="cs-section-body">65% des installations d'applications proviennent de recherches dans les app stores — l'ASO est le levier prioritaire, complété par un site vitrine et une stratégie de communication ciblée.</p>
+    <div class="mkt-list">
+      <div class="mkt-item"><div class="mkt-arrow">→</div><div class="mkt-text"><strong>ASO (App Store Optimisation)</strong> — mots-clés, titres, sous-titres, descriptions, screenshots et vidéos optimisés pour le Play Store et l'App Store.</div></div>
+      <div class="mkt-item"><div class="mkt-arrow">→</div><div class="mkt-text"><strong>Site vitrine</strong> — 62% des consommateurs visitent le site avant de télécharger une application. Améliore la crédibilité et le référencement naturel.</div></div>
+      <div class="mkt-item"><div class="mkt-arrow">→</div><div class="mkt-text"><strong>Réseaux sociaux</strong> — Facebook et Instagram ciblent les parents (50% des parents d'enfants 3-11 ans sur Facebook). LinkedIn pour les partenaires et certifications.</div></div>
+      <div class="mkt-item"><div class="mkt-arrow">→</div><div class="mkt-text"><strong>Influence</strong> — Partenariat avec @Jenesuispasjolie (909K abonnés), audience majoritairement de parents, engagée sur les causes caritatives.</div></div>
+    </div>
+    <div class="cs-chips" style="margin-top:20px;">
+      <div class="cs-chip">ASO</div>
+      <div class="cs-chip">Site vitrine</div>
+      <div class="cs-chip">Social media</div>
+      <div class="cs-chip">Influence</div>
+      <div class="cs-chip">Presse</div>
+      <div class="cs-chip">Certification Apple</div>
+    </div>
+  </div>
+
+  <!-- ÉVOLUTION -->
+  <div class="cs-section">
+    <div class="cs-section-num">06</div>
+    <div class="cs-section-title">Évolution future</div>
+    <p class="cs-section-body">Lier les livres et l'application pour une expérience phygital complète, et être commercialisé dans des enseignes spécialisées comme Cultura pour toucher un public plus large.</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <div class="cs-nav-proj">
+    <a href="projet-asaprocky.html" class="cs-nav-link">← Projet précédent</a>
+    <a href="projet-rer.html" class="cs-nav-link">
+      <div style="text-align:right;">
+        <div class="cs-nav-label">Projet suivant</div>
+        <div>RER : De la Frustration à la Fluidité →</div>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<a href="mailto:s.a.voloch@gmail.com" id="float-contact">Me contacter</a>
+
+<script>
+(function(){
+const glEl=document.getElementById('glitch-el');
+let glT=300;
+function fireGlitch(){glEl.style.top=(window.innerHeight*(0.15+Math.random()*0.7))+'px';glEl.style.opacity='1';setTimeout(()=>{glEl.style.opacity='0';},40+Math.random()*100);}
+(function loop(){if(--glT<=0&&Math.random()<0.012){fireGlitch();glT=200+Math.floor(Math.random()*300);}requestAnimationFrame(loop);})();
+const cur=document.getElementById('cur');
+const ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function lc(){rx+=(mx-rx)*0.11;ry+=(my-ry)*0.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lc);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='13px';cur.style.height='13px';ring.style.width='44px';ring.style.height='44px';ring.style.borderColor='rgba(251,239,12,0.7)';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(251,239,12,0.4)';});
+});
+document.addEventListener('mouseleave',()=>{cur.style.opacity='0';ring.style.opacity='0';});
+document.addEventListener('mouseenter',()=>{cur.style.opacity='1';ring.style.opacity='1';});
+})();
+</script>
+</body>
+</html>
