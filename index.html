@@ -82,6 +82,14 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;ali
 .scroll-hint-btn{width:28px;height:28px;border:0.5px solid rgba(251,239,12,0.25);background:transparent;color:rgba(251,239,12,0.5);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s,color .15s;font-family:var(--mono);}
 .scroll-hint-btn:hover{border-color:var(--y);color:var(--y);}
 .proj-cta{opacity:1;}
+#process{border-top:0.5px solid rgba(251,239,12,0.08);}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.process-card{background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:28px 24px;transition:background .2s,border-color .2s,transform .15s;}
+.process-card:hover{background:rgba(251,239,12,0.06);border-color:rgba(251,239,12,0.5);transform:translateY(-3px);}
+.process-n{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;color:rgba(251,239,12,0.4);margin-bottom:16px;}
+.process-title{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:14px;line-height:1.3;}
+.process-text{font-size:12px;color:var(--dim);line-height:1.75;}
+@media(max-width:768px){.process-grid{grid-template-columns:1fr 1fr;}}
 #xp{border-top:0.5px solid rgba(251,239,12,0.08);}
 .xp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .xp-card{background:var(--card);border:1px solid rgba(251,239,12,0.12);padding:28px 30px;}
@@ -233,6 +241,62 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
     </div>
   </section>
 
+
+  <section id="process">
+    <h2 class="sec-title">Ma Démarche</h2>
+    <div class="process-grid">
+
+      <div class="process-card">
+        <div class="process-n">01</div>
+        <div class="process-title">Premier contact</div>
+        <div class="process-text">On échange sur votre projet, vos besoins et vos objectifs. C'est le moment de partager vos attentes et vos contraintes pour que je comprenne l'enjeu avant de me lancer.</div>
+      </div>
+
+      <div class="process-card">
+        <div class="process-n">02</div>
+        <div class="process-title">On se rencontre</div>
+        <div class="process-text">Je prépare un rendez-vous structuré pour poser les bases du projet. Ensemble, on explore vos utilisateurs, vos objectifs et les priorités pour lancer la collaboration sur de bonnes bases.</div>
+      </div>
+
+      <div class="process-card">
+        <div class="process-n">03</div>
+        <div class="process-title">Recherche utilisateur</div>
+        <div class="process-text">J'identifie vos personas et analyse leurs comportements pour concevoir des parcours clairs et cohérents. Cette phase structure l'architecture de l'expérience et assure une navigation adaptée à chaque profil.</div>
+      </div>
+
+      <div class="process-card">
+        <div class="process-n">04</div>
+        <div class="process-title">UX et prototypage</div>
+        <div class="process-text">Je conçois vos parcours et vos écrans essentiels à partir de wireframes clairs. Cette étape permet de visualiser l'expérience avant le design final et d'ajuster les interactions pour garantir une navigation fluide.</div>
+      </div>
+
+      <div class="process-card">
+        <div class="process-n">05</div>
+        <div class="process-title">UI et identité visuelle</div>
+        <div class="process-text">Je construis l'univers graphique de votre projet : couleurs, typographies et composants visuels. L'objectif : une identité cohérente et reconnaissable qui renforce l'expérience utilisateur et la crédibilité de votre marque.</div>
+      </div>
+
+      <div class="process-card">
+        <div class="process-n">06</div>
+        <div class="process-title">Tests et itérations</div>
+        <div class="process-text">Une fois les maquettes validées, je teste les interfaces auprès d'utilisateurs réels. Leurs retours guident mes ajustements pour affiner les parcours, améliorer la clarté et garantir une expérience fluide et efficace.</div>
+      </div>
+
+      <div class="process-card">
+        <div class="process-n">07</div>
+        <div class="process-title">Maquettes finales</div>
+        <div class="process-text">Je finalise les derniers ajustements et valide chaque détail du design. Les maquettes prêtes à l'intégration traduisent fidèlement vos besoins et assurent une cohérence visuelle sur l'ensemble du projet.</div>
+      </div>
+
+      <div class="process-card">
+        <div class="process-n">08</div>
+        <div class="process-title">Livraison & passation</div>
+        <div class="process-text">Je vous remets l'ensemble des maquettes et des éléments graphiques, accompagnés d'explications claires. Cette étape assure une transition fluide vers l'intégration et garantit la bonne continuité du projet.</div>
+      </div>
+
+    </div>
+  </section>
+
   <section id="xp">
     <h2 class="sec-title">Mes Expériences</h2>
     <div class="xp-grid">
@@ -276,7 +340,7 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
 </div>
 
 <footer>
-  <span class="foot-copy">Samuel V. UX-UI Designer — 2026</span>
+  <span class="foot-copy">Samuel V. — UX-UI Designer — 2025</span>
   <span class="foot-copy">Île-de-France</span>
 </footer>
 
