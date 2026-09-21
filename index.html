@@ -3,154 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Samuel V. — UX-UI Designer</title>
-<meta name="description" content="Je suis Samuel, et je résous ce que vous ne savez pas encore nommer. UX-UI Designer basé en Île-de-France.">
+<title>Samuel V. · UX/UI Designer</title>
+<meta name="description" content="Je suis Samuel, et je résous ce que vous ne savez pas encore nommer. UX/UI Designer basé en Île-de-France.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-@font-face {
-  font-family: 'VCR OSD Mono';
-  src: url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff') format('woff');
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{--y:#FBEF0C;--bg:#080808;--card:#101010;--card2:#141414;--white:#F0EDE4;--dim:rgba(240,237,228,0.45);--mono:'VCR OSD Mono','Courier New',monospace;--sans:'Work Sans','Arial',sans-serif;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;cursor:none;}
-#bg{position:fixed;inset:0;z-index:0;background-color:#0d0d0d;}
-#bg::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");opacity:0.18;animation:snow 0.08s steps(1) infinite;}
-@keyframes snow{0%{transform:translate(0,0);}10%{transform:translate(-3%,-4%);}20%{transform:translate(4%,2%);}30%{transform:translate(-2%,5%);}40%{transform:translate(3%,-3%);}50%{transform:translate(-5%,1%);}60%{transform:translate(2%,4%);}70%{transform:translate(-4%,-2%);}80%{transform:translate(5%,3%);}90%{transform:translate(-1%,-5%);}100%{transform:translate(3%,2%);}}
-#scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 2px,rgba(0,0,0,0.10) 2px,rgba(0,0,0,0.10) 4px);}
-#vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 20%,rgba(0,0,0,0.65) 100%);}
-#glitch-el{position:fixed;left:0;right:0;height:1px;background:rgba(251,239,12,0.5);z-index:4;pointer-events:none;opacity:0;transition:opacity 0.05s;}
-#cur{position:fixed;width:8px;height:8px;background:var(--y);border-radius:50%;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
-#cur-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(251,239,12,0.4);border-radius:50%;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
-.page{position:relative;z-index:10;}
-section{padding:70px 60px;}
-nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;border-bottom:0.5px solid rgba(251,239,12,0.08);backdrop-filter:blur(8px);background:rgba(8,8,8,0.75);}
-.nav-logo{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;color:var(--white);}
-.nav-links{display:flex;gap:40px;list-style:none;}
-.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
-.nav-links a:hover{color:var(--y);}
-.nav-status{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--dim);display:flex;align-items:center;gap:7px;}
-.blink{width:5px;height:5px;border-radius:50%;background:var(--y);animation:blink 1.4s step-end infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-#hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding-top:80px;}
-.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--y);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:up .6s .2s ease forwards;}
-.hero-title{font-family:var(--sans);font-size:clamp(44px,5.5vw,80px);font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:var(--white);margin-bottom:20px;opacity:0;animation:up .7s .4s ease forwards;}
-.hero-title em{font-style:normal;color:var(--y);}
-.hero-sub{font-family:var(--sans);font-size:15px;font-weight:300;color:var(--dim);max-width:420px;line-height:1.7;margin-bottom:32px;opacity:0;animation:up .65s .65s ease forwards;}
-.hero-btns{display:flex;gap:12px;opacity:0;animation:up .6s .85s ease forwards;}
-.btn-pill{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;padding:13px 28px;border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .15s,opacity .15s;}
-.btn-pill:hover{transform:translateY(-2px);}
-.btn-pill-y{background:var(--y);color:#080808;border:none;}
-.btn-pill-g{background:rgba(255,255,255,0.1);color:var(--white);border:1px solid rgba(255,255,255,0.15);}
-.btn-pill-g:hover{background:rgba(255,255,255,0.16);}
-@keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-.sec-title{font-family:var(--mono);font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--y);margin-bottom:28px;}
-#about{border-top:0.5px solid rgba(251,239,12,0.08);}
-.about-text p{font-size:15px;color:var(--dim);line-height:1.75;max-width:780px;margin-bottom:16px;}
-.about-text p:last-child{margin-bottom:0;}
-#work{border-top:0.5px solid rgba(251,239,12,0.08);}
-.proj-scroll{display:flex;gap:16px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:16px;cursor:grab;}
-.proj-scroll:active{cursor:grabbing;}
-.proj-scroll::-webkit-scrollbar{height:2px;}
-.proj-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,0.04);}
-.proj-scroll::-webkit-scrollbar-thumb{background:rgba(251,239,12,0.3);border-radius:2px;}
-.proj-card{flex:0 0 340px;background:var(--card);border:1px solid rgba(251,239,12,0.2);scroll-snap-align:start;cursor:pointer;transition:border-color .2s,transform .2s;text-decoration:none;display:block;}
-.proj-card:hover{border-color:rgba(251,239,12,0.6);transform:translateY(-3px);}
-.proj-thumb{width:100%;aspect-ratio:4/3;background:var(--card2);position:relative;display:flex;align-items:center;justify-content:center;}
-.proj-num{position:absolute;top:14px;left:16px;font-family:var(--mono);font-size:10px;letter-spacing:0.2em;color:rgba(251,239,12,0.35);}
-.ph{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:24px;opacity:.08;}
-.ph-b{background:var(--white);border-radius:2px;}
-.proj-body{padding:18px 20px 20px;}
-.proj-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(251,239,12,0.5);margin-bottom:10px;}
-.proj-name{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:10px;line-height:1.4;}
-.proj-desc{font-family:var(--mono);font-size:11px;color:rgba(240,237,228,0.32);line-height:1.7;margin-bottom:18px;}
-.proj-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px;}
-.proj-year{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.18);}
-.proj-credit{position:absolute;bottom:8px;right:10px;font-family:var(--mono);font-size:8px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);}
-.scroll-hint{display:flex;align-items:center;gap:10px;margin-top:16px;justify-content:flex-end;}
-.scroll-hint-text{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(240,237,228,0.3);text-transform:uppercase;}
-.scroll-hint-arrows{display:flex;gap:6px;}
-.scroll-hint-btn{width:28px;height:28px;border:0.5px solid rgba(251,239,12,0.25);background:transparent;color:rgba(251,239,12,0.5);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s,color .15s;font-family:var(--mono);}
-.scroll-hint-btn:hover{border-color:var(--y);color:var(--y);}
-.proj-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--y);opacity:0;transition:opacity .2s;}
-.proj-card:hover .proj-credit{position:absolute;bottom:8px;right:10px;font-family:var(--mono);font-size:8px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);}
-.scroll-hint{display:flex;align-items:center;gap:10px;margin-top:16px;justify-content:flex-end;}
-.scroll-hint-text{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(240,237,228,0.3);text-transform:uppercase;}
-.scroll-hint-arrows{display:flex;gap:6px;}
-.scroll-hint-btn{width:28px;height:28px;border:0.5px solid rgba(251,239,12,0.25);background:transparent;color:rgba(251,239,12,0.5);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s,color .15s;font-family:var(--mono);}
-.scroll-hint-btn:hover{border-color:var(--y);color:var(--y);}
-.proj-cta{opacity:1;}
-#process{border-top:0.5px solid rgba(251,239,12,0.08);}
-.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-.process-card{background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:28px 24px;transition:background .2s,border-color .2s,transform .15s;}
-.process-card:hover{background:rgba(251,239,12,0.06);border-color:rgba(251,239,12,0.5);transform:translateY(-3px);}
-.process-n{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;color:rgba(251,239,12,0.4);margin-bottom:16px;}
-.process-title{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:14px;line-height:1.3;}
-.process-text{font-size:12px;color:var(--dim);line-height:1.75;}
-@media(max-width:768px){.process-grid{grid-template-columns:1fr 1fr;}}
-#xp{border-top:0.5px solid rgba(251,239,12,0.08);}
-.xp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.xp-card{background:var(--card);border:1px solid rgba(251,239,12,0.12);padding:28px 30px;}
-.xp-company{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--y);margin-bottom:4px;text-transform:uppercase;}
-.xp-role{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:0.06em;color:var(--white);margin-bottom:6px;}
-.xp-period{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:rgba(251,239,12,0.5);margin-bottom:18px;text-align:left;}
-.xp-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.xp-list li{font-size:13px;color:var(--dim);line-height:1.55;padding-left:16px;position:relative;}
-.xp-list li::before{content:'·';position:absolute;left:0;color:var(--y);}
-#contact{border-top:0.5px solid rgba(251,239,12,0.08);text-align:center;}
-.contact-big{font-family:var(--sans);font-size:clamp(32px,4vw,56px);font-weight:700;letter-spacing:-0.02em;color:var(--white);margin-bottom:16px;line-height:1.1;}
-.contact-big em{font-style:normal;color:var(--y);}
-.contact-sub{font-size:15px;color:var(--dim);margin-bottom:44px;font-weight:300;}
-.contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-.contact-link{font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:12px 24px;border:0.5px solid rgba(255,255,255,0.15);transition:color .2s,border-color .2s;}
-.contact-link:hover{color:var(--y);border-color:rgba(251,239,12,0.4);}
-footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10;}
-.foot-copy{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.18);text-transform:uppercase;}
-#float-contact{position:fixed;bottom:32px;right:32px;z-index:200;font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#080808;background:var(--y);border:none;padding:13px 22px;border-radius:100px;text-decoration:none;cursor:pointer;transition:transform .2s,opacity .3s;box-shadow:0 4px 24px rgba(251,239,12,0.18);}
-#float-contact:hover{transform:translateY(-2px);}
-#float-contact.hidden{opacity:0;pointer-events:none;transform:translateY(8px);}
-@media(max-width:768px){section{padding:56px 24px;}nav{padding:0 24px;}.nav-links{display:none;}footer{padding:20px 24px;}.xp-grid{grid-template-columns:1fr;}.hero-title{font-size:36px;}}
-
-
-#back-top{
-  position:fixed;bottom:88px;right:32px;z-index:200;
-  font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
-  color:#080808;background:var(--y);border:none;
-  padding:13px 22px;border-radius:100px;cursor:pointer;
-  box-shadow:0 4px 24px rgba(251,239,12,0.18);
-  display:none;
-  transition:opacity .2s,transform .15s;
-}
-#back-top:hover{opacity:0.85;transform:translateY(-2px);}
-#back-top.visible{display:block;}
-</style>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 </head>
 <body>
 
-<div id="bg"></div>
-<div id="scanlines"></div>
-<div id="vignette"></div>
-<div id="glitch-el"></div>
-<div id="cur"></div>
-<div id="cur-ring"></div>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
-<nav>
-  <div class="nav-logo">SAMUEL V.</div>
+<div class="fx" aria-hidden="true">
+  <div id="bg"></div>
+  <div id="scanlines"></div>
+  <div id="vignette"></div>
+  <div id="glitch-el"></div>
+  <div id="cur"></div>
+  <div id="cur-ring"></div>
+</div>
+
+<nav class="nav" aria-label="Navigation principale">
+  <a href="#hero" class="nav-logo">SAMUEL V.</a>
   <ul class="nav-links">
     <li><a href="#work">Travaux</a></li>
     <li><a href="#about">À propos</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank">Mon CV</a></li>
+    <li><a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank" rel="noopener noreferrer">Mon CV<span class="sr-only"> (nouvel onglet)</span></a></li>
   </ul>
-  <div class="nav-status"><div class="blink"></div><span>Disponible</span></div>
+  <p class="nav-status"><span class="blink" aria-hidden="true"></span>Disponible</p>
 </nav>
 
-<div class="page">
+<main id="contenu" class="main">
 
-  <section id="hero">
-    <p class="hero-eyebrow">UX-UI Designer — Île-de-France</p>
+  <section id="hero" class="section">
+    <p class="hero-eyebrow">UX/UI Designer — Île-de-France</p>
     <h1 class="hero-title">
       Je suis Samuel,<br>
       et je résous ce que<br>
@@ -159,176 +47,207 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
     </h1>
     <p class="hero-sub">Designer centré sur l'accessibilité et l'expérience inclusive. Je transforme les frictions invisibles en interfaces qui fonctionnent pour tout le monde.</p>
     <div class="hero-btns">
-      <a href="#work" class="btn-pill btn-pill-y">Voir les projets</a>
-      <a href="#contact" class="btn-pill btn-pill-g">Me contacter</a>
+      <a href="#work" class="btn btn-y">Voir les projets</a>
+      <a href="#contact" class="btn btn-g">Me contacter</a>
     </div>
   </section>
 
-  <section id="about">
+  <section id="about" class="section">
     <h2 class="sec-title">À Propos</h2>
     <div class="about-text">
-      <p>Je m'appelle Samuel V. Je suis UX-UI Designer basé en Île-de-France, spécialisé dans l'accessibilité et le design inclusif.</p>
+      <p>Je m'appelle Samuel V. Je suis UX/UI Designer basé en Île-de-France, spécialisé dans l'accessibilité et le design inclusif.</p>
       <p>Mon parcours a commencé par deux ans d'alternance chez Courir, où j'ai travaillé à l'intersection du webdesign et de l'animation e-commerce — concevoir des interfaces qui tiennent la promesse d'une marque tout en guidant l'utilisateur sans qu'il s'en rende compte.</p>
       <p>Titulaire d'un Mastère en UX Design Interactif, je m'intéresse particulièrement aux expériences qui fonctionnent pour tout le monde — pas seulement pour l'utilisateur idéal. Le RGAA n'est pas une contrainte dans mon travail, c'est un point de départ.</p>
       <p>Je suis actuellement disponible en CDI et en freelance.</p>
     </div>
   </section>
 
-  <section id="work">
+  <section id="work" class="section">
     <h2 class="sec-title">Mes Projets</h2>
-    <div class="proj-scroll" id="proj-scroll">
 
-      <a class="proj-card" href="projet-courir.html">
-        <div class="proj-thumb">
-          <span class="proj-num">01</span>
-          <img src="Mockup Courir.png" alt="Refonte tunnel d'achat Courir" style="width:100%;height:100%;object-fit:cover;display:block;">
-        </div>
-        <div class="proj-body">
-          <div class="proj-tag">E-Commerce · UX Research</div>
-          <div class="proj-name">Refonte du tunnel d'achat — Courir</div>
-          <div class="proj-desc">Réduction des abandons panier par une restructuration du parcours utilisateur et une refonte des micro-interactions.</div>
-          <div class="proj-footer"><span class="proj-year">2024</span><span class="proj-cta">Voir le projet →</span></div>
-        </div>
-      </a>
-
-      <a class="proj-card" href="projet-asaprocky.html">
-        <div class="proj-thumb">
-          <span class="proj-num">02</span>
-          <img src="image_22.png" alt="Site interactif ASAP Rocky" style="width:100%;height:100%;object-fit:cover;display:block;">
-        </div>
-        <div class="proj-body">
-          <div class="proj-tag">Site interactif · Direction artistique</div>
-          <div class="proj-name">Site interactif — ASAP Rocky</div>
-          <div class="proj-desc">Conception d'un site interactif sur Figma dédié au rappeur ASAP Rocky — recherche créative, moodboard et prototype.</div>
-          <div class="proj-footer"><span class="proj-year">2023</span><span class="proj-cta">Voir le projet →</span></div>
-        </div>
-      </a>
-
-      <a class="proj-card" href="projet-artcourkids.html">
-        <div class="proj-thumb">
-          <span class="proj-num">03</span>
-          <div class="ph"><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:52px"></div><div class="ph-b" style="height:30px;grid-column:span 2"></div></div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-tag">UI Design · Application mobile</div>
-          <div class="proj-name">Art Coeur Kids</div>
-          <div class="proj-desc">Application d'art thérapie pour enfants hospitalisés — design ludique et féerique, stratégie marketing et prototype interactif.</div>
-          <div class="proj-footer"><span class="proj-year">2024</span><span class="proj-cta">Voir le projet →</span></div>
-        </div>
-      </a>
-
-      <a class="proj-card" href="projet-rer.html">
-        <div class="proj-thumb">
-          <span class="proj-num">04</span>
-          <img src="Container.png" alt="RER De la Frustration à la Fluidité" style="width:100%;height:100%;object-fit:cover;display:block;">
-        </div>
-        <div class="proj-body">
-          <div class="proj-tag">UX Research · Emotion Design</div>
-          <div class="proj-name">RER : De la Frustration à la Fluidité</div>
-          <div class="proj-desc">Semaine Emotion Design — Concevoir une expérience sensorielle pour transformer le chaos du RER A en moment fluide et serein.</div>
-          <div class="proj-footer"><span class="proj-year">2024</span><span class="proj-cta">Voir le projet →</span></div>
-        </div>
-      </a>
-
-      <a class="proj-card" href="projet-design-systemique.html">
-        <div class="proj-thumb">
-          <span class="proj-num">05</span>
-          <img src="mila-okta-safitri-QBdipcCUViI-unsplash.png" alt="Design Systémique — partage d'objets" style="width:100%;height:100%;object-fit:cover;display:block;">
-          <span class="proj-credit">Photo · Unsplash</span>
-        </div>
-        <div class="proj-body">
-          <div class="proj-tag">Design Systémique · UX Research</div>
-          <div class="proj-name">Rendu Design Systémique</div>
-          <div class="proj-desc">Plateforme de partage d'objets entre particuliers — Golden Circle, Blueprint, mapping des acteurs et boucles de causalités.</div>
-          <div class="proj-footer"><span class="proj-year">2025</span><span class="proj-cta">Voir le projet →</span></div>
-        </div>
-      </a>
-
+    <!-- Filtres : affichés par script.js (cachés si JavaScript est désactivé) -->
+    <div class="filters" data-filters hidden>
+      <div class="filter-group" role="group" aria-labelledby="fl-cat">
+        <span class="filter-label" id="fl-cat">Catégorie</span>
+        <button type="button" class="chip-btn" data-group="cat" data-filter="all" aria-pressed="true">Tous</button>
+        <button type="button" class="chip-btn" data-group="cat" data-filter="ux" aria-pressed="false">UX</button>
+        <button type="button" class="chip-btn" data-group="cat" data-filter="ui" aria-pressed="false">UI</button>
+      </div>
+      <div class="filter-group" role="group" aria-labelledby="fl-year">
+        <span class="filter-label" id="fl-year">Date</span>
+        <button type="button" class="chip-btn" data-group="year" data-filter="all" aria-pressed="true">Toutes</button>
+        <button type="button" class="chip-btn" data-group="year" data-filter="2025" aria-pressed="false">2025</button>
+        <button type="button" class="chip-btn" data-group="year" data-filter="2024" aria-pressed="false">2024</button>
+        <button type="button" class="chip-btn" data-group="year" data-filter="2023" aria-pressed="false">2023</button>
+      </div>
     </div>
+    <p class="filter-status" id="filter-status" role="status"></p>
+
+    <ul class="proj-scroll" id="proj-list" role="list" aria-label="Projets">
+
+      <li class="proj-item" data-cat="ux ui" data-year="2024">
+        <a class="proj-card" href="projet-courir.html" aria-labelledby="p1-name">
+          <div class="proj-thumb">
+            <span class="proj-num" aria-hidden="true">01</span>
+            <img src="Mockup%20Courir.png" alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="proj-body">
+            <p class="proj-tag">E-Commerce · UX Design</p>
+            <h3 class="proj-name" id="p1-name">Parcours omnicanal : Courir</h3>
+            <p class="proj-desc">Refonte des pages services omnicanaux : clarifier l'offre, réduire le défilement et offrir une navigation fluide sur desktop et mobile.</p>
+            <div class="proj-footer"><span class="proj-year">2024</span><span class="proj-cta">Voir le projet <span aria-hidden="true">→</span></span></div>
+          </div>
+        </a>
+      </li>
+
+      <li class="proj-item" data-cat="ui" data-year="2023">
+        <a class="proj-card" href="projet-asaprocky.html" aria-labelledby="p2-name">
+          <div class="proj-thumb">
+            <span class="proj-num" aria-hidden="true">02</span>
+            <img src="image_22.png" alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="proj-body">
+            <p class="proj-tag">Site interactif · Direction artistique</p>
+            <h3 class="proj-name" id="p2-name">Site interactif ASAP Rocky</h3>
+            <p class="proj-desc">Conception d'un site interactif sur Figma dédié au rappeur ASAP Rocky — recherche créative, moodboard et prototype.</p>
+            <div class="proj-footer"><span class="proj-year">2023</span><span class="proj-cta">Voir le projet <span aria-hidden="true">→</span></span></div>
+          </div>
+        </a>
+      </li>
+
+      <li class="proj-item" data-cat="ui" data-year="2024">
+        <a class="proj-card" href="projet-artcourkids.html" aria-labelledby="p3-name">
+          <div class="proj-thumb">
+            <span class="proj-num" aria-hidden="true">03</span>
+            <img src="Art_Coeur_Kids.webp" alt="" loading="lazy" decoding="async" style="object-position:50% 35%">    <!-- cadrage sur le visage -->
+          </div>
+          <div class="proj-body">
+            <p class="proj-tag">UI Design · Application mobile</p>
+            <h3 class="proj-name" id="p3-name">Art Coeur Kids</h3>
+            <p class="proj-desc">Application d'art thérapie pour enfants hospitalisés — design ludique et féerique, stratégie marketing et prototype interactif.</p>
+            <div class="proj-footer"><span class="proj-year">2024</span><span class="proj-cta">Voir le projet <span aria-hidden="true">→</span></span></div>
+          </div>
+        </a>
+      </li>
+
+      <li class="proj-item" data-cat="ux" data-year="2024">
+        <a class="proj-card" href="projet-rer.html" aria-labelledby="p4-name">
+          <div class="proj-thumb">
+            <span class="proj-num" aria-hidden="true">04</span>
+            <img src="Container.png" alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="proj-body">
+            <p class="proj-tag">UX Research · Emotion Design</p>
+            <h3 class="proj-name" id="p4-name">RER : De la Frustration à la Fluidité</h3>
+            <p class="proj-desc">Semaine Emotion Design — Concevoir une expérience sensorielle pour transformer le chaos du RER A en moment fluide et serein.</p>
+            <div class="proj-footer"><span class="proj-year">2024</span><span class="proj-cta">Voir le projet <span aria-hidden="true">→</span></span></div>
+          </div>
+        </a>
+      </li>
+
+      <li class="proj-item" data-cat="ux" data-year="2025">
+        <a class="proj-card" href="projet-design-systemique.html" aria-labelledby="p5-name">
+          <div class="proj-thumb">
+            <span class="proj-num" aria-hidden="true">05</span>
+            <img src="mila-okta-safitri-QBdipcCUViI-unsplash.png" alt="" loading="lazy" decoding="async">
+            <span class="proj-credit">Photo · Unsplash</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-tag">Design Systémique · UX Research</p>
+            <h3 class="proj-name" id="p5-name">Rendu Design Systémique</h3>
+            <p class="proj-desc">Plateforme de partage d'objets entre particuliers — Golden Circle, Blueprint, mapping des acteurs et boucles de causalités.</p>
+            <div class="proj-footer"><span class="proj-year">2025</span><span class="proj-cta">Voir le projet <span aria-hidden="true">→</span></span></div>
+          </div>
+        </a>
+      </li>
+
+    </ul>
+
+    <p class="proj-empty" id="proj-empty" hidden>Aucun projet ne correspond à ces filtres. <button type="button" id="filter-reset">Réinitialiser les filtres</button></p>
+
     <div class="scroll-hint">
       <span class="scroll-hint-text">Défiler</span>
       <div class="scroll-hint-arrows">
-        <button class="scroll-hint-btn" id="sh-prev" aria-label="Précédent">←</button>
-        <button class="scroll-hint-btn" id="sh-next" aria-label="Suivant">→</button>
+        <button type="button" class="scroll-hint-btn" id="sh-prev" aria-label="Projets précédents" aria-controls="proj-list"><span aria-hidden="true">←</span></button>
+        <button type="button" class="scroll-hint-btn" id="sh-next" aria-label="Projets suivants" aria-controls="proj-list"><span aria-hidden="true">→</span></button>
       </div>
     </div>
   </section>
 
-
-  <section id="process">
+  <section id="process" class="section">
     <h2 class="sec-title">Ma Démarche</h2>
     <div class="process-grid">
 
       <div class="process-card">
-        <div class="process-n">01</div>
-        <div class="process-title">Premier contact</div>
-        <div class="process-text">On échange sur votre projet, vos besoins et vos objectifs. C'est le moment de partager vos attentes et vos contraintes pour que je comprenne l'enjeu avant de me lancer.</div>
+        <div class="process-n" aria-hidden="true">01</div>
+        <h3 class="process-title">Premier contact</h3>
+        <p class="process-text">On échange sur votre projet, vos besoins et vos objectifs. C'est le moment de partager vos attentes et vos contraintes pour que je comprenne l'enjeu avant de me lancer.</p>
       </div>
 
       <div class="process-card">
-        <div class="process-n">02</div>
-        <div class="process-title">On se rencontre</div>
-        <div class="process-text">Je prépare un rendez-vous structuré pour poser les bases du projet. Ensemble, on explore vos utilisateurs, vos objectifs et les priorités pour lancer la collaboration sur de bonnes bases.</div>
+        <div class="process-n" aria-hidden="true">02</div>
+        <h3 class="process-title">On se rencontre</h3>
+        <p class="process-text">Je prépare un rendez-vous structuré pour poser les bases du projet. Ensemble, on explore vos utilisateurs, vos objectifs et les priorités pour lancer la collaboration sur de bonnes bases.</p>
       </div>
 
       <div class="process-card">
-        <div class="process-n">03</div>
-        <div class="process-title">Recherche utilisateur</div>
-        <div class="process-text">J'identifie vos personas et analyse leurs comportements pour concevoir des parcours clairs et cohérents. Cette phase structure l'architecture de l'expérience et assure une navigation adaptée à chaque profil.</div>
+        <div class="process-n" aria-hidden="true">03</div>
+        <h3 class="process-title">Recherche utilisateur</h3>
+        <p class="process-text">J'identifie vos personas et analyse leurs comportements pour concevoir des parcours clairs et cohérents. Cette phase structure l'architecture de l'expérience et assure une navigation adaptée à chaque profil.</p>
       </div>
 
       <div class="process-card">
-        <div class="process-n">04</div>
-        <div class="process-title">UX et prototypage</div>
-        <div class="process-text">Je conçois vos parcours et vos écrans essentiels à partir de wireframes clairs. Cette étape permet de visualiser l'expérience avant le design final et d'ajuster les interactions pour garantir une navigation fluide.</div>
+        <div class="process-n" aria-hidden="true">04</div>
+        <h3 class="process-title">UX et prototypage</h3>
+        <p class="process-text">Je conçois vos parcours et vos écrans essentiels à partir de wireframes clairs. Cette étape permet de visualiser l'expérience avant le design final et d'ajuster les interactions pour garantir une navigation fluide.</p>
       </div>
 
       <div class="process-card">
-        <div class="process-n">05</div>
-        <div class="process-title">UI et identité visuelle</div>
-        <div class="process-text">Je construis l'univers graphique de votre projet : couleurs, typographies et composants visuels. L'objectif : une identité cohérente et reconnaissable qui renforce l'expérience utilisateur et la crédibilité de votre marque.</div>
+        <div class="process-n" aria-hidden="true">05</div>
+        <h3 class="process-title">UI et identité visuelle</h3>
+        <p class="process-text">Je construis l'univers graphique de votre projet : couleurs, typographies et composants visuels. L'objectif : une identité cohérente et reconnaissable qui renforce l'expérience utilisateur et la crédibilité de votre marque.</p>
       </div>
 
       <div class="process-card">
-        <div class="process-n">06</div>
-        <div class="process-title">Tests et itérations</div>
-        <div class="process-text">Une fois les maquettes validées, je teste les interfaces auprès d'utilisateurs réels. Leurs retours guident mes ajustements pour affiner les parcours, améliorer la clarté et garantir une expérience fluide et efficace.</div>
+        <div class="process-n" aria-hidden="true">06</div>
+        <h3 class="process-title">Tests et itérations</h3>
+        <p class="process-text">Une fois les maquettes validées, je teste les interfaces auprès d'utilisateurs réels. Leurs retours guident mes ajustements pour affiner les parcours, améliorer la clarté et garantir une expérience fluide et efficace.</p>
       </div>
 
       <div class="process-card">
-        <div class="process-n">07</div>
-        <div class="process-title">Maquettes finales</div>
-        <div class="process-text">Je finalise les derniers ajustements et valide chaque détail du design. Les maquettes prêtes à l'intégration traduisent fidèlement vos besoins et assurent une cohérence visuelle sur l'ensemble du projet.</div>
+        <div class="process-n" aria-hidden="true">07</div>
+        <h3 class="process-title">Maquettes finales</h3>
+        <p class="process-text">Je finalise les derniers ajustements et valide chaque détail du design. Les maquettes prêtes à l'intégration traduisent fidèlement vos besoins et assurent une cohérence visuelle sur l'ensemble du projet.</p>
       </div>
 
       <div class="process-card">
-        <div class="process-n">08</div>
-        <div class="process-title">Livraison & passation</div>
-        <div class="process-text">Je vous remets l'ensemble des maquettes et des éléments graphiques, accompagnés d'explications claires. Cette étape assure une transition fluide vers l'intégration et garantit la bonne continuité du projet.</div>
+        <div class="process-n" aria-hidden="true">08</div>
+        <h3 class="process-title">Livraison &amp; passation</h3>
+        <p class="process-text">Je vous remets l'ensemble des maquettes et des éléments graphiques, accompagnés d'explications claires. Cette étape assure une transition fluide vers l'intégration et garantit la bonne continuité du projet.</p>
       </div>
 
     </div>
   </section>
 
-  <section id="xp">
+  <section id="xp" class="section">
     <h2 class="sec-title">Mes Expériences</h2>
     <div class="xp-grid">
-      <div class="xp-card">
-        <div class="xp-company">Courir</div>
-        <div class="xp-role">Assistant Animation E-Commerce &amp; Webdesign</div>
-        <div class="xp-period">Alternance · Décembre 2023 – Novembre 2025</div>
+      <article class="xp-card">
+        <p class="xp-company">Courir</p>
+        <h3 class="xp-role">Assistant Animation E-Commerce &amp; Webdesign</h3>
+        <p class="xp-period">Alternance · Décembre 2023 à Novembre 2025</p>
         <ul class="xp-list">
           <li>Refonte et optimisation de pages clés : homepage, services omnicanaux, parcours web &amp; e-réservation</li>
           <li>Analyse des besoins utilisateurs et cadrage des problématiques UX</li>
           <li>Conception de parcours utilisateurs, wireframes et interfaces UI</li>
-          <li>Déclinaison des interfaces multi-devices : desktop, mobile, tablette</li>
+          <li>Déclinaison des interfaces sur tous les supports : desktop, mobile, tablette</li>
           <li>Production de visuels et assets digitaux intégrés aux parcours e-commerce</li>
         </ul>
-      </div>
-      <div class="xp-card">
-        <div class="xp-company">Formation</div>
-        <div class="xp-role">Mastère en UX Design Interactif</div>
-        <div class="xp-period">2023 – 2025</div>
+      </article>
+      <article class="xp-card">
+        <p class="xp-company">Formation</p>
+        <h3 class="xp-role">Mastère en UX Design Interactif</h3>
+        <p class="xp-period">2023 à 2025</p>
         <ul class="xp-list">
           <li>Recherche utilisateur, tests d'usabilité et analyse heuristique</li>
           <li>Prototypage et design d'interaction sous Figma</li>
@@ -336,72 +255,31 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
           <li>Design system et documentation de composants</li>
           <li>Gestion de projet UX en équipe pluridisciplinaire</li>
         </ul>
-      </div>
+      </article>
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="section">
     <h2 class="contact-big">Travaillons<br><em>ensemble.</em></h2>
     <p class="contact-sub">Disponible en CDI et en freelance — Île-de-France &amp; remote</p>
     <div class="contact-links">
       <a href="mailto:s.a.voloch@gmail.com" class="contact-link">Email</a>
-      <a href="https://www.linkedin.com/in/samuel-voloch-94533a205/" target="_blank" class="contact-link">LinkedIn</a>
-      <a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank" class="contact-link">Télécharger le CV</a>
+      <a href="https://www.linkedin.com/in/samuel-voloch-94533a205/" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn<span class="sr-only"> (nouvel onglet)</span></a>
+      <a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="contact-link">Télécharger le CV<span class="sr-only"> (nouvel onglet)</span></a>
     </div>
   </section>
 
-</div>
+</main>
 
-<footer>
-  <span class="foot-copy">Samuel V. — UX-UI Designer — 2025</span>
+<footer class="foot">
+  <span class="foot-copy">© 2026 Samuel V.</span>
   <span class="foot-copy">Île-de-France</span>
 </footer>
 
-<script>
-(function(){
-const glEl=document.getElementById('glitch-el');
-let glT=300;
-function fireGlitch(){glEl.style.top=(window.innerHeight*(0.15+Math.random()*0.7))+'px';glEl.style.opacity='1';setTimeout(()=>{glEl.style.opacity='0';},40+Math.random()*100);}
-function glitchLoop(){if(--glT<=0&&Math.random()<0.012){fireGlitch();glT=200+Math.floor(Math.random()*300);}requestAnimationFrame(glitchLoop);}
-glitchLoop();
-const scroll=document.getElementById('proj-scroll');
-let isDown=false,startX,scrollLeft;
-scroll.addEventListener('mousedown',e=>{isDown=true;startX=e.pageX-scroll.offsetLeft;scrollLeft=scroll.scrollLeft;});
-scroll.addEventListener('mouseleave',()=>{isDown=false;});
-scroll.addEventListener('mouseup',()=>{isDown=false;});
-scroll.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-scroll.offsetLeft;scroll.scrollLeft=scrollLeft-(x-startX)*1.2;});
-const cur_el=document.getElementById('cur');
-const ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur_el.style.left=mx+'px';cur_el.style.top=my+'px';});
-(function lc(){rx+=(mx-rx)*0.11;ry+=(my-ry)*0.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lc);})();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur_el.style.width='13px';cur_el.style.height='13px';ring.style.width='44px';ring.style.height='44px';ring.style.borderColor='rgba(251,239,12,0.7)';});
-  el.addEventListener('mouseleave',()=>{cur_el.style.width='8px';cur_el.style.height='8px';ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(251,239,12,0.4)';});
-});
-document.addEventListener('mouseleave',()=>{cur_el.style.opacity='0';ring.style.opacity='0';});
-document.addEventListener('mouseenter',()=>{cur_el.style.opacity='1';ring.style.opacity='1';});
-const floatBtn=document.getElementById('float-contact');
-const contactSection=document.getElementById('contact');
-const observer=new IntersectionObserver(entries=>{floatBtn.classList.toggle('hidden',entries[0].isIntersecting);},{threshold:0.15});
-observer.observe(contactSection);
-
-/* ── BACK TO TOP / CONTACT TOGGLE ── */const floatContact = document.getElementById('float-contact');if(backTop) backTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
-
-/* ── BACK TO TOP ── */
-const backTop = document.getElementById('back-top');
-window.addEventListener('scroll', function() {
-  if(backTop) backTop.classList.toggle('visible', window.scrollY > 400);
-});
-if(backTop) backTop.addEventListener('click', function() {
-  window.scrollTo({top:0, behavior:'smooth'});
-});
-})();
-</script>
-
 <a href="mailto:s.a.voloch@gmail.com" id="float-contact">Me contacter</a>
+<button type="button" id="back-top" aria-label="Retour en haut de la page">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5M5 11l7-7 7 7"/></svg>
+</button>
 
-
-<button id="back-top" aria-label="Retour en haut">↑ Haut</button>
 </body>
 </html>
