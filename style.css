@@ -208,13 +208,14 @@ ul, ol { list-style: none; }
 #hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; border-top: 0; }
 .hero-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--y); margin-bottom: 20px; opacity: 0; animation: up .6s .2s ease forwards; }
 .hero-title { font-size: clamp(44px, 5.5vw, 80px); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; margin-bottom: 20px; opacity: 0; animation: up .7s .4s ease forwards; }
-.hero-title em { font-style: normal; color: var(--y); }
-.hero-sub { font-size: 15px; font-weight: 300; color: var(--dim); max-width: 420px; line-height: 1.7; margin-bottom: 32px; opacity: 0; animation: up .65s .65s ease forwards; }
+.hero-title em { font-style: normal; color: var(--y); white-space: nowrap; }
+.hero-sub { font-size: 16px; font-weight: 300; color: var(--dim); max-width: 500px; line-height: 1.7; margin-bottom: 32px; opacity: 0; animation: up .65s .65s ease forwards; }
 .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; opacity: 0; animation: up .6s .85s ease forwards; }
 @keyframes up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
 .about-text p { font-size: 15px; color: var(--dim); line-height: 1.75; max-width: 780px; margin-bottom: 16px; }
 .about-text p:last-child { margin-bottom: 0; }
+.nowrap { white-space: nowrap; }
 
 /* Filtres des projets */
 .filters { display: flex; flex-wrap: wrap; gap: 14px 40px; margin-bottom: 28px; }
