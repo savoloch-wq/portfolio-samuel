@@ -5,228 +5,167 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rendu Design Systémique · Samuel V.</title>
 <meta name="description" content="Rendu Design Systémique — Plateforme de partage d'objets entre particuliers pour réduire la surconsommation. Golden Circle, Blueprint, Boucles de causalités.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-@font-face{font-family:'VCR OSD Mono';src:url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff') format('woff');}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{--y:#FBEF0C;--bg:#080808;--card:#101010;--card2:#141414;--white:#F0EDE4;--dim:rgba(240,237,228,0.45);--mono:'VCR OSD Mono','Courier New',monospace;--sans:'Work Sans','Arial',sans-serif;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;cursor:none;}
-#bg{position:fixed;inset:0;z-index:0;background-color:#0d0d0d;}
-#bg::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");opacity:0.18;animation:snow .08s steps(1) infinite;}
-@keyframes snow{0%{transform:translate(0,0);}10%{transform:translate(-3%,-4%);}20%{transform:translate(4%,2%);}30%{transform:translate(-2%,5%);}40%{transform:translate(3%,-3%);}50%{transform:translate(-5%,1%);}60%{transform:translate(2%,4%);}70%{transform:translate(-4%,-2%);}80%{transform:translate(5%,3%);}90%{transform:translate(-1%,-5%);}100%{transform:translate(3%,2%);}}
-#scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 2px,rgba(0,0,0,0.10) 2px,rgba(0,0,0,0.10) 4px);}
-#vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 20%,rgba(0,0,0,0.65) 100%);}
-#glitch-el{position:fixed;left:0;right:0;height:1px;background:rgba(251,239,12,0.5);z-index:4;pointer-events:none;opacity:0;}
-#cur{position:fixed;width:8px;height:8px;background:var(--y);border-radius:50%;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
-#cur-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(251,239,12,0.4);border-radius:50%;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+/* Golden Circle */
+.gc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+.gc-card { padding: 24px 20px; }
+.gc-label { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 12px; }
+.gc-text { font-size: 13px; color: var(--dim); line-height: 1.7; }
 
-nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;border-bottom:0.5px solid rgba(251,239,12,0.08);backdrop-filter:blur(8px);background:rgba(8,8,8,0.75);}
-.nav-logo{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;color:var(--white);text-decoration:none;}
-.nav-links{display:flex;gap:40px;list-style:none;}
-.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
-.nav-links a:hover{color:var(--y);}
-.nav-status{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--dim);display:flex;align-items:center;gap:7px;}
-.blink{width:5px;height:5px;border-radius:50%;background:var(--y);animation:blink 1.4s step-end infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+/* Contraintes */
+.constraints-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+.constraint { display: flex; align-items: flex-start; gap: 12px; padding: 16px 20px; border-color: rgba(255,255,255,.08); }
+.constraint-dot { flex-shrink: 0; width: 6px; height: 6px; margin-top: 7px; border-radius: 50%; background: var(--y); }
+.constraint-text { font-size: 13px; color: var(--dim); line-height: 1.6; }
 
-.page{position:relative;z-index:10;max-width:900px;margin:0 auto;padding:120px 60px 100px;}
+/* Acteurs */
+.actors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+.actor-card { padding: 20px; }
+.actor-title { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 12px; }
+.actor-list { display: flex; flex-direction: column; gap: 6px; }
+.actor-list li { position: relative; padding-left: 14px; font-size: 12px; color: var(--dim); line-height: 1.5; }
+.actor-list li::before { content: '·'; position: absolute; left: 0; color: var(--y); }
 
-.cs-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.5);margin-bottom:16px;opacity:0;animation:up .5s .1s ease forwards;}
-.cs-title{font-family:var(--sans);font-size:clamp(32px,4.5vw,52px);font-weight:700;letter-spacing:-0.02em;line-height:1.05;color:var(--white);margin-bottom:20px;opacity:0;animation:up .6s .25s ease forwards;}
-.cs-title em{font-style:normal;color:var(--y);}
-.cs-intro{font-size:16px;font-weight:300;color:var(--dim);line-height:1.75;max-width:660px;margin-bottom:40px;opacity:0;animation:up .6s .4s ease forwards;}
-@keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+/* Blueprint */
+.blueprint-box { margin-top: 24px; padding: 28px; }
+.blueprint-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px; }
+.blueprint-label { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 8px; }
+.blueprint-val { font-size: 14px; color: var(--dim); line-height: 1.6; }
+.blueprint-note { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--dim); border-top: .5px solid rgba(251,239,12,.12); padding-top: 16px; }
 
-.cs-meta{display:flex;gap:0;margin-bottom:48px;border:1px solid rgba(251,239,12,0.1);opacity:0;animation:up .5s .55s ease forwards;}
-.cs-meta-item{flex:1;padding:20px 24px;border-right:1px solid rgba(251,239,12,0.1);}
-.cs-meta-item:last-child{border-right:none;}
-.cs-meta-label{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:8px;}
-.cs-meta-val{font-family:var(--mono);font-size:12px;color:var(--white);}
+/* Boucles des causalités */
+.boucles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+.boucle-card { padding: 22px; border: 1px solid; }
+.boucle-pos { --tone: #4AC878; border-color: rgba(74,200,120,.35); background: rgba(74,200,120,.05); }
+.boucle-neg { --tone: #E36A6A; border-color: rgba(227,106,106,.35); background: rgba(227,106,106,.05); }
+.boucle-reb { --tone: #C8964A; border-color: rgba(200,150,74,.35); background: rgba(200,150,74,.05); }
+.boucle-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--tone); margin-bottom: 10px; }
+.boucle-title { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .04em; margin-bottom: 10px; }
+.boucle-text { font-size: 12px; color: var(--dim); line-height: 1.6; }
 
-.pres-btn{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#080808;background:var(--y);padding:16px 32px;text-decoration:none;border-radius:100px;transition:opacity .2s,transform .15s;margin-bottom:56px;}
-.pres-btn:hover{opacity:0.85;transform:translateY(-2px);}
+/* Solutions */
+.solutions-list { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+.sol-item { display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px; border-color: rgba(255,255,255,.08); }
+.sol-arrow { flex-shrink: 0; margin-top: 1px; font-family: var(--mono); font-size: 14px; color: var(--y); }
+.sol-text { font-size: 14px; color: var(--dim); line-height: 1.65; }
+.sol-text strong { color: var(--white); font-weight: 500; }
 
-.cs-section{margin-bottom:56px;}
-.cs-section-num{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:10px;}
-.cs-section-title{font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:18px;}
-.cs-section-body{font-size:15px;font-weight:300;color:var(--dim);line-height:1.8;}
-
-/* GOLDEN CIRCLE */
-.gc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px;}
-.gc-card{background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:24px 20px;}
-.gc-label{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(251,239,12,0.5);margin-bottom:12px;}
-.gc-text{font-size:13px;color:var(--dim);line-height:1.7;}
-
-/* CONTRAINTES */
-.constraints-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px;}
-.constraint{background:var(--card);border:1px solid rgba(255,255,255,0.05);padding:16px 20px;display:flex;gap:12px;align-items:flex-start;}
-.constraint-dot{width:6px;height:6px;border-radius:50%;background:var(--y);flex-shrink:0;margin-top:5px;}
-.constraint-text{font-size:13px;color:var(--dim);line-height:1.6;}
-
-/* ACTEURS */
-.actors-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px;}
-.actor-card{background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:20px;}
-.actor-title{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(251,239,12,0.5);margin-bottom:12px;}
-.actor-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
-.actor-list li{font-size:12px;color:var(--dim);padding-left:14px;position:relative;line-height:1.5;}
-.actor-list li::before{content:'·';position:absolute;left:0;color:var(--y);}
-
-/* BLUEPRINT */
-.blueprint-box{background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:28px;margin-top:24px;}
-.blueprint-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px;}
-.blueprint-label{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:8px;}
-.blueprint-val{font-size:14px;color:var(--dim);line-height:1.6;}
-.blueprint-note{font-family:var(--mono);font-size:11px;color:rgba(240,237,228,0.3);letter-spacing:0.08em;border-top:0.5px solid rgba(251,239,12,0.08);padding-top:16px;}
-
-/* BOUCLES */
-.boucles-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px;}
-.boucle-card{padding:22px;border:1px solid;}
-.boucle-pos{border-color:rgba(74,200,120,0.3);background:rgba(74,200,120,0.04);}
-.boucle-neg{border-color:rgba(200,74,74,0.3);background:rgba(200,74,74,0.04);}
-.boucle-reb{border-color:rgba(200,150,74,0.3);background:rgba(200,150,74,0.04);}
-.boucle-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:10px;}
-.boucle-pos .boucle-tag{color:rgba(74,200,120,0.7);}
-.boucle-neg .boucle-tag{color:rgba(200,74,74,0.7);}
-.boucle-reb .boucle-tag{color:rgba(200,150,74,0.7);}
-.boucle-title{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--white);margin-bottom:10px;letter-spacing:0.04em;}
-.boucle-text{font-size:12px;color:var(--dim);line-height:1.6;}
-
-/* SOLUTIONS */
-.solutions-list{display:flex;flex-direction:column;gap:10px;margin-top:24px;}
-.sol-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);padding:18px 22px;display:flex;gap:14px;align-items:flex-start;}
-.sol-arrow{font-family:var(--mono);font-size:14px;color:var(--y);flex-shrink:0;margin-top:1px;}
-.sol-text{font-size:14px;color:var(--dim);line-height:1.65;}
-.sol-text strong{color:var(--white);font-weight:500;}
-
-.cs-quote{border-left:2px solid var(--y);padding:16px 24px;margin-top:24px;background:rgba(251,239,12,0.03);}
-.cs-quote p{font-size:14px;font-style:italic;color:var(--dim);line-height:1.7;}
-
-.cs-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
-.cs-chip{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;border:0.5px solid rgba(251,239,12,0.2);color:rgba(251,239,12,0.55);padding:7px 14px;}
-
-.cs-divider{border:none;border-top:0.5px solid rgba(251,239,12,0.08);margin:56px 0;}
-.cs-nav-proj{display:flex;justify-content:space-between;align-items:center;}
-.cs-nav-link{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
-.cs-nav-link:hover{color:var(--y);}
-.cs-nav-label{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(251,239,12,0.35);margin-bottom:4px;}
-
-#float-contact{position:fixed;bottom:32px;right:32px;z-index:200;font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#080808;background:var(--y);border:none;padding:13px 22px;border-radius:100px;text-decoration:none;cursor:pointer;transition:opacity .2s,transform .15s;box-shadow:0 4px 24px rgba(251,239,12,0.18);}
-#float-contact:hover{opacity:0.85;transform:translateY(-2px);}
-
-@media(max-width:768px){
-  nav{padding:0 24px;}.nav-links{display:none;}
-  .page{padding:100px 24px 80px;}
-  .cs-meta{flex-direction:column;}.cs-meta-item{border-right:none;border-bottom:1px solid rgba(251,239,12,0.1);}.cs-meta-item:last-child{border-bottom:none;}
-  .gc-grid,.actors-grid,.boucles-grid{grid-template-columns:1fr;}
-  .constraints-grid,.blueprint-row{grid-template-columns:1fr;}
+@media (max-width: 768px) {
+  .gc-grid, .actors-grid, .boucles-grid, .constraints-grid, .blueprint-row { grid-template-columns: 1fr; }
 }
 </style>
+<script src="script.js" defer></script>
 </head>
 <body>
 
-<div id="bg"></div>
-<div id="scanlines"></div>
-<div id="vignette"></div>
-<div id="glitch-el"></div>
-<div id="cur"></div>
-<div id="cur-ring"></div>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
-<nav>
+<div class="fx" aria-hidden="true">
+  <div id="bg"></div>
+  <div id="scanlines"></div>
+  <div id="vignette"></div>
+  <div id="glitch-el"></div>
+  <div id="cur"></div>
+  <div id="cur-ring"></div>
+</div>
+
+<nav class="nav" aria-label="Navigation principale">
   <a href="index.html" class="nav-logo">SAMUEL V.</a>
   <ul class="nav-links">
     <li><a href="index.html#work">Travaux</a></li>
     <li><a href="index.html#about">À propos</a></li>
     <li><a href="index.html#contact">Contact</a></li>
-    <li><a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank">Mon CV</a></li>
+    <li><a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank" rel="noopener noreferrer">Mon CV<span class="sr-only"> (nouvel onglet)</span></a></li>
   </ul>
-  <div class="nav-status"><div class="blink"></div><span>Disponible</span></div>
+  <p class="nav-status"><span class="blink" aria-hidden="true"></span>Disponible</p>
 </nav>
 
-<div class="page">
+<main id="contenu" class="main cs">
 
-  <div class="cs-tag">Design Systémique · Mastère A5 · 2025</div>
+  <p class="cs-tag">Design Systémique · Mastère A5 · 2025</p>
   <h1 class="cs-title">Rendu<br><em>Design Systémique</em></h1>
   <p class="cs-intro">Comment concevoir une solution digitale fiable et accessible qui facilite le partage d'objets peu utilisés entre particuliers afin de limiter la surconsommation ?</p>
 
-  <div class="cs-meta">
-    <div class="cs-meta-item"><div class="cs-meta-label">Contexte</div><div class="cs-meta-val">Rendu Mastère A5</div></div>
-    <div class="cs-meta-item"><div class="cs-meta-label">Approche</div><div class="cs-meta-val">Design systémique</div></div>
-    <div class="cs-meta-item"><div class="cs-meta-label">Livrables</div><div class="cs-meta-val">Blueprint · Boucles · Mapping</div></div>
-    <div class="cs-meta-item"><div class="cs-meta-label">Année</div><div class="cs-meta-val">2025</div></div>
+  <dl class="cs-meta">
+    <div class="cs-meta-item"><dt class="cs-meta-label">Contexte</dt><dd class="cs-meta-val">Rendu Mastère A5</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Approche</dt><dd class="cs-meta-val">Design systémique</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Livrables</dt><dd class="cs-meta-val">Blueprint · Boucles · Mapping</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Année</dt><dd class="cs-meta-val">2025</dd></div>
+  </dl>
+
+  <div class="cs-cta">
+    <a href="https://www.figma.com/deck/UI8bzZkEiiaa5wS7dQscbi/Design-syst%C3%A9mique?node-id=1-32&amp;t=D9qt6YrzsW431WD2-1" target="_blank" rel="noopener noreferrer" class="btn btn-y">Voir la présentation Figma<span class="sr-only"> (nouvel onglet)</span></a>
   </div>
 
-  <a href="https://www.figma.com/deck/UI8bzZkEiiaa5wS7dQscbi/Design-syst%C3%A9mique?node-id=1-32&t=D9qt6YrzsW431WD2-1" target="_blank" class="pres-btn">Voir la présentation Figma</a>
-
-  <!-- PROBLÉMATIQUE -->
-  <div class="cs-section">
-    <div class="cs-section-num">01</div>
-    <div class="cs-section-title">Problématique</div>
-    <div class="cs-quote">
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">01</p>
+    <h2 class="cs-section-title">Problématique</h2>
+    <blockquote class="cs-quote">
       <p>Comment concevoir une solution digitale fiable et accessible qui facilite le partage d'objets peu utilisés entre particuliers afin de limiter la surconsommation ?</p>
-    </div>
+    </blockquote>
     <p class="cs-section-body" style="margin-top:20px;">L'objectif est de créer une solution digitale qui facilite la mutualisation et le partage de matériel entre particuliers afin de réduire la surconsommation et encourager un modèle plus durable et solidaire.</p>
-  </div>
+  </section>
 
-  <!-- GOLDEN CIRCLE -->
-  <div class="cs-section">
-    <div class="cs-section-num">02</div>
-    <div class="cs-section-title">Golden Circle</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">02</p>
+    <h2 class="cs-section-title">Golden Circle</h2>
     <div class="gc-grid">
-      <div class="gc-card">
-        <div class="gc-label">Pourquoi</div>
-        <div class="gc-text">Réduire la surconsommation de matériel rarement utilisé (perceuses, tondeuses…) en encourageant un modèle durable, collaboratif et local basé sur l'économie du partage.</div>
-      </div>
-      <div class="gc-card">
-        <div class="gc-label">Comment</div>
-        <div class="gc-text">En concevant une solution digitale qui facilite la mise en relation entre particuliers, rend le partage simple et accessible, et crée un cadre de confiance pour encourager l'entraide.</div>
-      </div>
-      <div class="gc-card">
-        <div class="gc-label">Quoi</div>
-        <div class="gc-text">Une plateforme numérique pour mettre à disposition ou emprunter des objets, visualiser les disponibilités à proximité, avec système de notation, assurance et conditions d'usage claires.</div>
-      </div>
+      <article class="gc-card card">
+        <h3 class="gc-label">Pourquoi</h3>
+        <p class="gc-text">Réduire la surconsommation de matériel rarement utilisé (perceuses, tondeuses…) en encourageant un modèle durable, collaboratif et local basé sur l'économie du partage.</p>
+      </article>
+      <article class="gc-card card">
+        <h3 class="gc-label">Comment</h3>
+        <p class="gc-text">En concevant une solution digitale qui facilite la mise en relation entre particuliers, rend le partage simple et accessible, et crée un cadre de confiance pour encourager l'entraide.</p>
+      </article>
+      <article class="gc-card card">
+        <h3 class="gc-label">Quoi</h3>
+        <p class="gc-text">Une plateforme numérique pour mettre à disposition ou emprunter des objets, visualiser les disponibilités à proximité, avec système de notation, assurance et conditions d'usage claires.</p>
+      </article>
     </div>
-  </div>
+  </section>
 
-  <!-- CONTRAINTES -->
-  <div class="cs-section">
-    <div class="cs-section-num">03</div>
-    <div class="cs-section-title">Contraintes identifiées</div>
-    <div class="constraints-grid">
-      <div class="constraint"><div class="constraint-dot"></div><div class="constraint-text">Fiabilité des utilisateurs et confiance — profilage, sécurité des données</div></div>
-      <div class="constraint"><div class="constraint-dot"></div><div class="constraint-text">Gestion des stocks et disponibilité en temps réel</div></div>
-      <div class="constraint"><div class="constraint-dot"></div><div class="constraint-text">Assurance légale en cas de problème avec l'objet prêté</div></div>
-      <div class="constraint"><div class="constraint-dot"></div><div class="constraint-text">Complexité logistique — lieux d'échange, horaires</div></div>
-      <div class="constraint"><div class="constraint-dot"></div><div class="constraint-text">Diversité des objets : tailles, types, fragilité</div></div>
-      <div class="constraint"><div class="constraint-dot"></div><div class="constraint-text">Engagement utilisateur — éviter l'effet « j'installe mais je n'utilise pas »</div></div>
-      <div class="constraint"><div class="constraint-dot"></div><div class="constraint-text">Changement des habitudes de consommation</div></div>
-    </div>
-  </div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">03</p>
+    <h2 class="cs-section-title">Contraintes identifiées</h2>
+    <ul class="constraints-grid">
+      <li class="constraint card"><span class="constraint-dot" aria-hidden="true"></span><p class="constraint-text">Fiabilité des utilisateurs et confiance — profilage, sécurité des données</p></li>
+      <li class="constraint card"><span class="constraint-dot" aria-hidden="true"></span><p class="constraint-text">Gestion des stocks et disponibilité en temps réel</p></li>
+      <li class="constraint card"><span class="constraint-dot" aria-hidden="true"></span><p class="constraint-text">Assurance légale en cas de problème avec l'objet prêté</p></li>
+      <li class="constraint card"><span class="constraint-dot" aria-hidden="true"></span><p class="constraint-text">Complexité logistique — lieux d'échange, horaires</p></li>
+      <li class="constraint card"><span class="constraint-dot" aria-hidden="true"></span><p class="constraint-text">Diversité des objets : tailles, types, fragilité</p></li>
+      <li class="constraint card"><span class="constraint-dot" aria-hidden="true"></span><p class="constraint-text">Engagement utilisateur — éviter l'effet « j'installe mais je n'utilise pas »</p></li>
+      <li class="constraint card"><span class="constraint-dot" aria-hidden="true"></span><p class="constraint-text">Changement des habitudes de consommation</p></li>
+    </ul>
+  </section>
 
-  <!-- ACTEURS -->
-  <div class="cs-section">
-    <div class="cs-section-num">04</div>
-    <div class="cs-section-title">Mapping des acteurs</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">04</p>
+    <h2 class="cs-section-title">Mapping des acteurs</h2>
     <div class="actors-grid">
-      <div class="actor-card">
-        <div class="actor-title">Décideurs clés</div>
+      <article class="actor-card card">
+        <h3 class="actor-title">Décideurs clés</h3>
         <ul class="actor-list">
           <li>Product Manager — vision produit globale</li>
           <li>CEO — pilote la vision et le business model</li>
           <li>CTO — vision technologique et faisabilité</li>
           <li>COO — bon fonctionnement opérationnel</li>
         </ul>
-      </div>
-      <div class="actor-card">
-        <div class="actor-title">Parties prenantes internes</div>
+      </article>
+      <article class="actor-card card">
+        <h3 class="actor-title">Parties prenantes internes</h3>
         <ul class="actor-list">
           <li>UX/UI Designer — expérience utilisateur et recherche terrain</li>
           <li>Développeurs — construction de la solution</li>
           <li>Service client / Community manager</li>
         </ul>
-      </div>
-      <div class="actor-card">
-        <div class="actor-title">Parties prenantes externes</div>
+      </article>
+      <article class="actor-card card">
+        <h3 class="actor-title">Parties prenantes externes</h3>
         <ul class="actor-list">
           <li>Assureurs partenaires</li>
           <li>Associations et partenaires potentiels</li>
@@ -234,109 +173,97 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;ali
           <li>Emprunteurs</li>
           <li>API de géolocalisation</li>
         </ul>
-      </div>
+      </article>
     </div>
-  </div>
+  </section>
 
-  <!-- BLUEPRINT -->
-  <div class="cs-section">
-    <div class="cs-section-num">05</div>
-    <div class="cs-section-title">Blueprint</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">05</p>
+    <h2 class="cs-section-title">Blueprint</h2>
     <p class="cs-section-body">Un blueprint complet du service, construit autour du parcours de Lisa — habitante d'un quartier résidentiel, bricoleuse occasionnelle, qui cherche à emprunter une perceuse pour monter une étagère.</p>
-    <div class="blueprint-box" style="margin-top:24px;">
+    <div class="blueprint-box card">
       <div class="blueprint-row">
         <div>
-          <div class="blueprint-label">Customer persona</div>
-          <div class="blueprint-val">Habitante d'un quartier résidentiel, bricoleuse occasionnelle.</div>
+          <h3 class="blueprint-label">Customer persona</h3>
+          <p class="blueprint-val">Habitante d'un quartier résidentiel, bricoleuse occasionnelle.</p>
         </div>
         <div>
-          <div class="blueprint-label">Scénario</div>
-          <div class="blueprint-val">Lisa cherche à emprunter une perceuse pour monter une étagère chez elle.</div>
+          <h3 class="blueprint-label">Scénario</h3>
+          <p class="blueprint-val">Lisa cherche à emprunter une perceuse pour monter une étagère chez elle.</p>
         </div>
       </div>
-      <div class="blueprint-note">Evidence → Customer actions → Frontstage actions → Backstage actions → Support processes</div>
+      <p class="blueprint-note">Evidence → Customer actions → Frontstage actions → Backstage actions → Support processes</p>
     </div>
-    <div class="cs-chips">
-      <div class="cs-chip">Carte interactive des objets</div>
-      <div class="cs-chip">Profil d'objet détaillé</div>
-      <div class="cs-chip">Chat intégré</div>
-      <div class="cs-chip">Scoring de confiance</div>
-      <div class="cs-chip">Notifications automatiques</div>
-      <div class="cs-chip">Évaluation après retour</div>
-    </div>
-  </div>
+    <ul class="cs-chips">
+      <li class="cs-chip">Carte interactive des objets</li>
+      <li class="cs-chip">Profil d'objet détaillé</li>
+      <li class="cs-chip">Chat intégré</li>
+      <li class="cs-chip">Scoring de confiance</li>
+      <li class="cs-chip">Notifications automatiques</li>
+      <li class="cs-chip">Évaluation après retour</li>
+    </ul>
+  </section>
 
-  <!-- BOUCLES -->
-  <div class="cs-section">
-    <div class="cs-section-num">06</div>
-    <div class="cs-section-title">Boucles des causalités</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">06</p>
+    <h2 class="cs-section-title">Boucles des causalités</h2>
     <p class="cs-section-body">Trois dynamiques systémiques identifiées qui conditionnent le succès ou l'échec de la plateforme.</p>
     <div class="boucles-grid">
-      <div class="boucle-card boucle-pos">
-        <div class="boucle-tag">Boucle positive</div>
-        <div class="boucle-title">Une confiance partagée</div>
-        <div class="boucle-text">Plus il y a d'échanges réussis, plus il y a d'avis positifs. Plus la confiance augmente, plus les gens prêtent et empruntent → croissance de l'usage.</div>
-      </div>
-      <div class="boucle-card boucle-neg">
-        <div class="boucle-tag">Boucle négative</div>
-        <div class="boucle-title">Méfiance fonctionnelle</div>
-        <div class="boucle-text">Si trop d'incidents surviennent (casse, vol), la confiance chute → moins de personnes utilisent la plateforme → spirale négative.</div>
-      </div>
-      <div class="boucle-card boucle-reb">
-        <div class="boucle-tag">Effet rebond</div>
-        <div class="boucle-title">Qualité déceptive</div>
-        <div class="boucle-text">Des objets peu fiables ou mal entretenus créent de la frustration → désengagement → retour à l'achat. Effet inverse du but recherché.</div>
-      </div>
+      <article class="boucle-card boucle-pos">
+        <p class="boucle-tag">Boucle positive</p>
+        <h3 class="boucle-title">Une confiance partagée</h3>
+        <p class="boucle-text">Plus il y a d'échanges réussis, plus il y a d'avis positifs. Plus la confiance augmente, plus les gens prêtent et empruntent → croissance de l'usage.</p>
+      </article>
+      <article class="boucle-card boucle-neg">
+        <p class="boucle-tag">Boucle négative</p>
+        <h3 class="boucle-title">Méfiance fonctionnelle</h3>
+        <p class="boucle-text">Si trop d'incidents surviennent (casse, vol), la confiance chute → moins de personnes utilisent la plateforme → spirale négative.</p>
+      </article>
+      <article class="boucle-card boucle-reb">
+        <p class="boucle-tag">Effet rebond</p>
+        <h3 class="boucle-title">Qualité déceptive</h3>
+        <p class="boucle-text">Des objets peu fiables ou mal entretenus créent de la frustration → désengagement → retour à l'achat. Effet inverse du but recherché.</p>
+      </article>
     </div>
-  </div>
+  </section>
 
-  <!-- SOLUTIONS -->
-  <div class="cs-section">
-    <div class="cs-section-num">07</div>
-    <div class="cs-section-title">Comment éviter les boucles négatives ?</div>
-    <div class="solutions-list">
-      <div class="sol-item"><div class="sol-arrow">→</div><div class="sol-text">Mettre en place un <strong>système d'avis et de notation</strong> après chaque échange pour que les utilisateurs évaluent le sérieux des autres membres.</div></div>
-      <div class="sol-item"><div class="sol-arrow">→</div><div class="sol-text">Proposer une <strong>vérification des profils</strong> (adresse mail, téléphone, pièce d'identité) pour sécuriser les échanges.</div></div>
-      <div class="sol-item"><div class="sol-arrow">→</div><div class="sol-text">Inclure une <strong>assurance intégrée</strong> en partenariat avec un acteur spécialisé pour rassurer les prêteurs en cas de casse, vol ou perte.</div></div>
-      <div class="sol-item"><div class="sol-arrow">→</div><div class="sol-text">Intégrer des <strong>filtres de recherche intelligents</strong> (disponibilité, horaires compatibles) pour éviter les demandes non réalisables.</div></div>
-      <div class="sol-item"><div class="sol-arrow">→</div><div class="sol-text">Mettre en place des <strong>points relais partenaires</strong> (lieux associatifs, commerces de quartier) pour simplifier les échanges physiques.</div></div>
-    </div>
-  </div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">07</p>
+    <h2 class="cs-section-title">Comment éviter les boucles négatives ?</h2>
+    <ul class="solutions-list">
+      <li class="sol-item card"><span class="sol-arrow" aria-hidden="true">→</span><p class="sol-text">Mettre en place un <strong>système d'avis et de notation</strong> après chaque échange pour que les utilisateurs évaluent le sérieux des autres membres.</p></li>
+      <li class="sol-item card"><span class="sol-arrow" aria-hidden="true">→</span><p class="sol-text">Proposer une <strong>vérification des profils</strong> (adresse mail, téléphone, pièce d'identité) pour sécuriser les échanges.</p></li>
+      <li class="sol-item card"><span class="sol-arrow" aria-hidden="true">→</span><p class="sol-text">Inclure une <strong>assurance intégrée</strong> en partenariat avec un acteur spécialisé pour rassurer les prêteurs en cas de casse, vol ou perte.</p></li>
+      <li class="sol-item card"><span class="sol-arrow" aria-hidden="true">→</span><p class="sol-text">Intégrer des <strong>filtres de recherche intelligents</strong> (disponibilité, horaires compatibles) pour éviter les demandes non réalisables.</p></li>
+      <li class="sol-item card"><span class="sol-arrow" aria-hidden="true">→</span><p class="sol-text">Mettre en place des <strong>points relais partenaires</strong> (lieux associatifs, commerces de quartier) pour simplifier les échanges physiques.</p></li>
+    </ul>
+  </section>
 
-  <div class="cs-divider"></div>
+  <hr class="cs-divider">
 
-  <div class="cs-nav-proj">
-    <a href="projet-rer.html" class="cs-nav-link">← Projet précédent</a>
-    <a href="#" class="cs-nav-link">
-      <div style="text-align:right;">
-        <div class="cs-nav-label">Projet suivant</div>
-        <div>Application mobile →</div>
-      </div>
+  <nav class="cs-nav-proj" aria-label="Navigation entre les projets">
+    <a class="cs-nav-link cs-nav-prev" href="projet-rer.html" rel="prev">
+      <span class="cs-nav-label">Projet précédent</span>
+      <span class="cs-nav-title"><span aria-hidden="true">← </span>RER : De la Frustration à la Fluidité</span>
     </a>
-  </div>
+    <a class="cs-nav-link cs-nav-next" href="projet-courir.html" rel="next">
+      <span class="cs-nav-label">Projet suivant</span>
+      <span class="cs-nav-title">Parcours omnicanal : Courir<span aria-hidden="true"> →</span></span>
+    </a>
+  </nav>
+  <p class="cs-all"><a href="index.html#work">Voir tous les projets</a></p>
 
-</div>
+</main>
+
+<footer class="foot">
+  <span class="foot-copy">© 2026 Samuel V.</span>
+  <span class="foot-copy">Île-de-France</span>
+</footer>
 
 <a href="mailto:s.a.voloch@gmail.com" id="float-contact">Me contacter</a>
+<button type="button" id="back-top" aria-label="Retour en haut de la page">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5M5 11l7-7 7 7"/></svg>
+</button>
 
-<script>
-(function(){
-const glEl=document.getElementById('glitch-el');
-let glT=300;
-function fireGlitch(){glEl.style.top=(window.innerHeight*(0.15+Math.random()*0.7))+'px';glEl.style.opacity='1';setTimeout(()=>{glEl.style.opacity='0';},40+Math.random()*100);}
-(function loop(){if(--glT<=0&&Math.random()<0.012){fireGlitch();glT=200+Math.floor(Math.random()*300);}requestAnimationFrame(loop);})();
-const cur=document.getElementById('cur');
-const ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function lc(){rx+=(mx-rx)*0.11;ry+=(my-ry)*0.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lc);})();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.width='13px';cur.style.height='13px';ring.style.width='44px';ring.style.height='44px';ring.style.borderColor='rgba(251,239,12,0.7)';});
-  el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(251,239,12,0.4)';});
-});
-document.addEventListener('mouseleave',()=>{cur.style.opacity='0';ring.style.opacity='0';});
-document.addEventListener('mouseenter',()=>{cur.style.opacity='1';ring.style.opacity='1';});
-})();
-</script>
 </body>
 </html>
