@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site interactif ASAP Rocky · Samuel V.</title>
+<title>Site interactif ASAP Rocky · Samuel Voloch</title>
+<meta name="author" content="Samuel Voloch">
 <meta name="description" content="Projet école : site interactif sur Figma dédié à ASAP Rocky. Moodboard, couleurs, typographies, boutons et prototype interactif.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,14 +26,14 @@
 .typo-card { padding: 28px; }
 .typo-name { font-size: 20px; letter-spacing: .02em; margin-bottom: 12px; }
 .typo-alphabet { font-family: var(--mono); font-size: 11px; line-height: 2; letter-spacing: .08em; color: var(--faint); margin-bottom: 16px; }
-.typo-desc { font-family: var(--mono); font-size: 12px; line-height: 1.7; color: var(--dim); border-top: .5px solid rgba(251,239,12,.12); padding-top: 14px; }
+.typo-desc { font-family: var(--sans); font-size: 14px; line-height: 1.7; color: var(--dim); border-top: .5px solid rgba(251,239,12,.12); padding-top: 14px; }
 
 /* Boutons */
 .btn-row-showcase { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
 .btn-group { display: flex; flex-direction: column; gap: 8px; }
-.btn-group-label { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 4px; }
-.demo-state { font-family: var(--mono); font-size: 9px; color: var(--y-dim); margin-top: 8px; }
-.demo-spec { font-family: var(--mono); font-size: 9px; color: var(--faint); }
+.btn-group-label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 4px; }
+.demo-state { font-family: var(--mono); font-size: 12px; color: var(--y-dim); margin-top: 8px; }
+.demo-spec { font-family: var(--mono); font-size: 12px; color: var(--faint); }
 .btn-demo {
   display: flex; align-items: center; justify-content: center; width: 270px; max-width: 100%; height: 66px;
   font-family: 'Caveat', cursive; font-weight: 700; font-size: 18px; letter-spacing: .04em; text-transform: uppercase;
@@ -70,8 +71,9 @@
 </div>
 
 <nav class="nav" aria-label="Navigation principale">
-  <a href="index.html" class="nav-logo">SAMUEL V.</a>
-  <ul class="nav-links">
+  <a href="index.html" class="nav-logo">SAMUEL VOLOCH</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu"><span class="nav-toggle-icon" aria-hidden="true"></span>Menu</button>
+  <ul class="nav-links" id="nav-menu">
     <li><a href="index.html#work">Travaux</a></li>
     <li><a href="index.html#about">À propos</a></li>
     <li><a href="index.html#contact">Contact</a></li>
@@ -86,8 +88,14 @@
   <h1 class="cs-title">Site interactif<br><em>ASAP Rocky</em></h1>
   <p class="cs-intro">Projet réalisé pour l'école sur un sujet libre. J'ai choisi de traiter le rappeur ASAP Rocky — un prétexte pour construire une direction artistique forte : esthétique VHS, typographie vintage, identité rap assumée.</p>
 
+  <dl class="cs-brief">
+    <div class="cs-brief-row"><dt class="cs-brief-label">Rôle</dt><dd class="cs-brief-val">Direction artistique, design d'interface et prototype interactif, sur Figma.</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Contexte</dt><dd class="cs-brief-val">Projet d'école sur un sujet libre, en 2023. Pas de client : un prétexte pour construire un univers visuel fort autour d'ASAP Rocky.</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Résultat</dt><dd class="cs-brief-val">Un prototype Figma interactif complet (discographie, biographie, style) appuyé sur un système de design : couleurs, typographies, boutons et leurs états.</dd></div>
+  </dl>
+
   <dl class="cs-meta">
-    <div class="cs-meta-item"><dt class="cs-meta-label">Contexte</dt><dd class="cs-meta-val">Projet école</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Cadre</dt><dd class="cs-meta-val">Projet d'école</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Outil</dt><dd class="cs-meta-val">Figma</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Type</dt><dd class="cs-meta-val">Site interactif</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Année</dt><dd class="cs-meta-val">2023</dd></div>
@@ -114,6 +122,7 @@
       <figure class="shot"><img src="image_21.png" alt="Single Fin : Feel the freedom, Stay cool" loading="lazy" decoding="async"></figure>
       <figure class="shot"><img src="image_22.png" alt="ASAP Rocky devant sa voiture : Always Strive and Prosper" loading="lazy" decoding="async"></figure>
     </div>
+    <p class="cs-note"><strong>Crédits.</strong> Visuels de tiers (photographies d'ASAP Rocky, pochette de l'album Astroworld de Travis Scott, single Fin, interface VHS) : droits réservés à leurs auteurs. Ils sont reproduits à titre d'inspiration, dans un projet non commercial.</p>
   </section>
 
   <section class="cs-section">
@@ -219,7 +228,7 @@
 </main>
 
 <footer class="foot">
-  <span class="foot-copy">© 2026 Samuel V.</span>
+  <span class="foot-copy">© 2026 Samuel Voloch</span>
   <span class="foot-copy">Île-de-France</span>
 </footer>
 

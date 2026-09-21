@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rendu Design Systémique · Samuel V.</title>
+<title>Rendu Design Systémique · Samuel Voloch</title>
+<meta name="author" content="Samuel Voloch">
 <meta name="description" content="Rendu Design Systémique — Plateforme de partage d'objets entre particuliers pour réduire la surconsommation. Golden Circle, Blueprint, Boucles de causalités.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,7 @@
 /* Golden Circle */
 .gc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
 .gc-card { padding: 24px 20px; }
-.gc-label { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 12px; }
+.gc-label { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 12px; }
 .gc-text { font-size: 13px; color: var(--dim); line-height: 1.7; }
 
 /* Contraintes */
@@ -25,17 +26,17 @@
 /* Acteurs */
 .actors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
 .actor-card { padding: 20px; }
-.actor-title { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 12px; }
+.actor-title { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 12px; }
 .actor-list { display: flex; flex-direction: column; gap: 6px; }
-.actor-list li { position: relative; padding-left: 14px; font-size: 12px; color: var(--dim); line-height: 1.5; }
+.actor-list li { position: relative; padding-left: 14px; font-size: 13px; color: var(--dim); line-height: 1.5; }
 .actor-list li::before { content: '·'; position: absolute; left: 0; color: var(--y); }
 
 /* Blueprint */
 .blueprint-box { margin-top: 24px; padding: 28px; }
 .blueprint-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px; }
-.blueprint-label { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 8px; }
+.blueprint-label { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 8px; }
 .blueprint-val { font-size: 14px; color: var(--dim); line-height: 1.6; }
-.blueprint-note { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--dim); border-top: .5px solid rgba(251,239,12,.12); padding-top: 16px; }
+.blueprint-note { font-family: var(--sans); font-size: 13px; color: var(--dim); border-top: .5px solid rgba(251,239,12,.12); padding-top: 16px; }
 
 /* Boucles des causalités */
 .boucles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
@@ -43,9 +44,9 @@
 .boucle-pos { --tone: #4AC878; border-color: rgba(74,200,120,.35); background: rgba(74,200,120,.05); }
 .boucle-neg { --tone: #E36A6A; border-color: rgba(227,106,106,.35); background: rgba(227,106,106,.05); }
 .boucle-reb { --tone: #C8964A; border-color: rgba(200,150,74,.35); background: rgba(200,150,74,.05); }
-.boucle-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--tone); margin-bottom: 10px; }
-.boucle-title { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .04em; margin-bottom: 10px; }
-.boucle-text { font-size: 12px; color: var(--dim); line-height: 1.6; }
+.boucle-tag { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--tone); margin-bottom: 10px; }
+.boucle-title { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-bottom: 10px; }
+.boucle-text { font-size: 13px; color: var(--dim); line-height: 1.6; }
 
 /* Solutions */
 .solutions-list { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
@@ -74,8 +75,9 @@
 </div>
 
 <nav class="nav" aria-label="Navigation principale">
-  <a href="index.html" class="nav-logo">SAMUEL V.</a>
-  <ul class="nav-links">
+  <a href="index.html" class="nav-logo">SAMUEL VOLOCH</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu"><span class="nav-toggle-icon" aria-hidden="true"></span>Menu</button>
+  <ul class="nav-links" id="nav-menu">
     <li><a href="index.html#work">Travaux</a></li>
     <li><a href="index.html#about">À propos</a></li>
     <li><a href="index.html#contact">Contact</a></li>
@@ -90,8 +92,14 @@
   <h1 class="cs-title">Rendu<br><em>Design Systémique</em></h1>
   <p class="cs-intro">Comment concevoir une solution digitale fiable et accessible qui facilite le partage d'objets peu utilisés entre particuliers afin de limiter la surconsommation ?</p>
 
+  <dl class="cs-brief">
+    <div class="cs-brief-row"><dt class="cs-brief-label">Rôle</dt><dd class="cs-brief-val">Analyse systémique et conception du service : Golden Circle, mapping des acteurs, blueprint, boucles de causalités.</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Contexte</dt><dd class="cs-brief-val">Rendu du Mastère A5 (2025) : concevoir une solution digitale de partage d'objets entre particuliers pour limiter la surconsommation.</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Résultat</dt><dd class="cs-brief-val">Un blueprint complet autour de la persona Lisa, trois boucles de causalités et cinq leviers pour éviter les spirales négatives.</dd></div>
+  </dl>
+
   <dl class="cs-meta">
-    <div class="cs-meta-item"><dt class="cs-meta-label">Contexte</dt><dd class="cs-meta-val">Rendu Mastère A5</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Cadre</dt><dd class="cs-meta-val">Rendu Mastère A5</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Approche</dt><dd class="cs-meta-val">Design systémique</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Livrables</dt><dd class="cs-meta-val">Blueprint · Boucles · Mapping</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Année</dt><dd class="cs-meta-val">2025</dd></div>
@@ -256,7 +264,7 @@
 </main>
 
 <footer class="foot">
-  <span class="foot-copy">© 2026 Samuel V.</span>
+  <span class="foot-copy">© 2026 Samuel Voloch</span>
   <span class="foot-copy">Île-de-France</span>
 </footer>
 

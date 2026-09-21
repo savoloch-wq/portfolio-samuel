@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Art Coeur Kids · Samuel V.</title>
+<title>Art Coeur Kids · Samuel Voloch</title>
+<meta name="author" content="Samuel Voloch">
 <meta name="description" content="Application mobile d'art thérapie pour les enfants hospitalisés — design créatif, ludique et féerique, stratégie marketing et prototype interactif.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,12 +18,12 @@
 .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
 .value-card { padding: 20px 16px; text-align: center; }
 .value-icon { font-size: 22px; margin-bottom: 10px; }
-.value-label { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; line-height: 1.4; }
+.value-label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; line-height: 1.4; }
 
 /* Cibles */
 .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
 .target-card { padding: 22px 20px; }
-.target-title { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 10px; }
+.target-title { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 10px; }
 .target-text { font-size: 13px; color: var(--dim); line-height: 1.7; }
 
 /* Stratégie marketing */
@@ -53,8 +54,9 @@
 </div>
 
 <nav class="nav" aria-label="Navigation principale">
-  <a href="index.html" class="nav-logo">SAMUEL V.</a>
-  <ul class="nav-links">
+  <a href="index.html" class="nav-logo">SAMUEL VOLOCH</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu"><span class="nav-toggle-icon" aria-hidden="true"></span>Menu</button>
+  <ul class="nav-links" id="nav-menu">
     <li><a href="index.html#work">Travaux</a></li>
     <li><a href="index.html#about">À propos</a></li>
     <li><a href="index.html#contact">Contact</a></li>
@@ -69,8 +71,14 @@
   <h1 class="cs-title">Art Coeur Kids —<br><em>L'art thérapie</em><br>pour les enfants</h1>
   <p class="cs-intro">Concevoir une application mobile créative, ludique et féerique pour sortir les enfants hospitalisés de leur isolement et leur donner la force d'affronter leur maladie.</p>
 
+  <dl class="cs-brief">
+    <div class="cs-brief-row"><dt class="cs-brief-label">Rôle</dt><dd class="cs-brief-val">Design de l'interface mobile, stratégie marketing et prototype interactif sur Figma.</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Contexte</dt><dd class="cs-brief-val">Projet d'étude autour d'Art Coeur Kids, qui propose de l'art thérapie aux enfants hospitalisés ou soignés à domicile (3 à 11 ans).</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Résultat</dt><dd class="cs-brief-val">Un univers graphique féerique, un prototype interactif et un plan marketing complet : ASO, site vitrine, réseaux sociaux, influence.</dd></div>
+  </dl>
+
   <dl class="cs-meta">
-    <div class="cs-meta-item"><dt class="cs-meta-label">Client</dt><dd class="cs-meta-val">Art Coeur Kids</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Cadre</dt><dd class="cs-meta-val">Projet d'étude</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Type</dt><dd class="cs-meta-val">UI Design · App mobile</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Cible</dt><dd class="cs-meta-val">Enfants de 3 à 11 ans</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Livrables</dt><dd class="cs-meta-val">Prototype · Stratégie</dd></div>
@@ -133,13 +141,14 @@
   <section class="cs-section">
     <p class="cs-section-num" aria-hidden="true">05</p>
     <h2 class="cs-section-title">Stratégie marketing</h2>
-    <p class="cs-section-body">65% des installations d'applications proviennent de recherches dans les app stores — l'ASO est le levier prioritaire, complété par un site vitrine et une stratégie de communication ciblée.</p>
+    <p class="cs-section-body">Hypothèse de départ : 65 % des installations d'applications viendraient de recherches dans les app stores. L'ASO est donc le levier prioritaire, complété par un site vitrine et une stratégie de communication ciblée.</p>
     <ul class="mkt-list">
       <li class="mkt-item card"><span class="mkt-arrow" aria-hidden="true">→</span><p class="mkt-text"><strong>ASO (App Store Optimisation)</strong> — mots-clés, titres, sous-titres, descriptions, screenshots et vidéos optimisés pour le Play Store et l'App Store.</p></li>
-      <li class="mkt-item card"><span class="mkt-arrow" aria-hidden="true">→</span><p class="mkt-text"><strong>Site vitrine</strong> — 62% des consommateurs visitent le site avant de télécharger une application. Améliore la crédibilité et le référencement naturel.</p></li>
-      <li class="mkt-item card"><span class="mkt-arrow" aria-hidden="true">→</span><p class="mkt-text"><strong>Réseaux sociaux</strong> — Facebook et Instagram ciblent les parents (50% des parents d'enfants de 3 à 11 ans sur Facebook). LinkedIn pour les partenaires et certifications.</p></li>
-      <li class="mkt-item card"><span class="mkt-arrow" aria-hidden="true">→</span><p class="mkt-text"><strong>Influence</strong> — Partenariat avec @Jenesuispasjolie (909K abonnés), audience majoritairement de parents, engagée sur les causes caritatives.</p></li>
+      <li class="mkt-item card"><span class="mkt-arrow" aria-hidden="true">→</span><p class="mkt-text"><strong>Site vitrine</strong> — Hypothèse : 62 % des consommateurs visiteraient le site avant de télécharger une application. Améliore la crédibilité et le référencement naturel.</p></li>
+      <li class="mkt-item card"><span class="mkt-arrow" aria-hidden="true">→</span><p class="mkt-text"><strong>Réseaux sociaux</strong> — Facebook et Instagram ciblent les parents (hypothèse : 50 % des parents d'enfants de 3 à 11 ans sont sur Facebook). LinkedIn pour les partenaires et certifications.</p></li>
+      <li class="mkt-item card"><span class="mkt-arrow" aria-hidden="true">→</span><p class="mkt-text"><strong>Influence</strong> — Piste de partenariat avec @Jenesuispasjolie (909 K abonnés), audience majoritairement de parents, engagée sur les causes caritatives.</p></li>
     </ul>
+    <p class="cs-note"><strong>Chiffres de cadrage.</strong> Les pourcentages et le nombre d'abonnés ci-dessus sont des hypothèses de travail, non vérifiées auprès de sources officielles.</p>
     <ul class="cs-chips">
       <li class="cs-chip">ASO</li>
       <li class="cs-chip">Site vitrine</li>
@@ -173,7 +182,7 @@
 </main>
 
 <footer class="foot">
-  <span class="foot-copy">© 2026 Samuel V.</span>
+  <span class="foot-copy">© 2026 Samuel Voloch</span>
   <span class="foot-copy">Île-de-France</span>
 </footer>
 

@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RER : De la Frustration à la Fluidité · Samuel V.</title>
+<title>RER : De la Frustration à la Fluidité · Samuel Voloch</title>
+<meta name="author" content="Samuel Voloch">
 <meta name="description" content="Semaine Emotion Design — Projet UX sur l'expérience sensorielle dans le RER A. Recherche utilisateur, storyboard, application mobile et maquette physique.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,13 +15,13 @@
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
 .stat-card { padding: 22px 18px; border-color: rgba(251,239,12,.12); }
 .stat-num { font-size: 32px; font-weight: 700; line-height: 1; color: var(--y); margin-bottom: 8px; }
-.stat-label { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; line-height: 1.5; color: var(--dim); }
+.stat-label { font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--dim); }
 
 /* Verbatims */
 .quotes-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
 .quote-item { padding: 20px 24px; border-color: rgba(255,255,255,.08); }
 .quote-text { font-size: 13px; line-height: 1.6; margin-bottom: 8px; }
-.quote-author { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; color: var(--y-dim); }
+.quote-author { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; color: var(--y-dim); }
 
 /* Découvertes */
 .findings-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
@@ -32,16 +33,16 @@
 /* Solution en trois leviers */
 .solution-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
 .sol-card { padding: 24px 20px; }
-.sol-num { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--y-dim); margin-bottom: 12px; }
+.sol-num { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; color: var(--y-dim); margin-bottom: 12px; }
 .sol-title { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
-.sol-text { font-size: 12px; color: var(--dim); line-height: 1.65; }
+.sol-text { font-size: 13px; color: var(--dim); line-height: 1.65; }
 
 /* Parcours de l'application */
 .steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
 .step-card { padding: 20px; }
 .step-num { font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--y); margin-bottom: 12px; }
 .step-title { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
-.step-text { font-size: 12px; color: var(--dim); line-height: 1.6; }
+.step-text { font-size: 13px; color: var(--dim); line-height: 1.6; }
 
 @media (max-width: 768px) {
   .stats-grid { grid-template-columns: 1fr 1fr; }
@@ -64,8 +65,9 @@
 </div>
 
 <nav class="nav" aria-label="Navigation principale">
-  <a href="index.html" class="nav-logo">SAMUEL V.</a>
-  <ul class="nav-links">
+  <a href="index.html" class="nav-logo">SAMUEL VOLOCH</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu"><span class="nav-toggle-icon" aria-hidden="true"></span>Menu</button>
+  <ul class="nav-links" id="nav-menu">
     <li><a href="index.html#work">Travaux</a></li>
     <li><a href="index.html#about">À propos</a></li>
     <li><a href="index.html#contact">Contact</a></li>
@@ -80,10 +82,16 @@
   <h1 class="cs-title">RER : De la Frustration<br>à la <em>Fluidité</em></h1>
   <p class="cs-intro">Une expérience sensorielle au service du transport. Comment transformer le chaos du RER A en un moment fluide et serein — en une semaine, en équipe de trois.</p>
 
+  <dl class="cs-brief">
+    <div class="cs-brief-row"><dt class="cs-brief-label">Rôle</dt><dd class="cs-brief-val">Équipe de trois, une semaine : entretiens utilisateurs, analyse des flux, concept, parcours de l'application Subway Mapper et maquette physique.</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Contexte</dt><dd class="cs-brief-val">Semaine Emotion Design du Mastère (A4, 2024) : traiter un problème du quotidien, le RER A aux heures de pointe.</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Résultat</dt><dd class="cs-brief-val">Un concept en trois leviers (indicateurs visuels, design sensoriel, application), présenté avec une maquette physique lors de la restitution.</dd></div>
+  </dl>
+
   <dl class="cs-meta">
-    <div class="cs-meta-item"><dt class="cs-meta-label">Contexte</dt><dd class="cs-meta-val">Semaine Emotion Design</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Cadre</dt><dd class="cs-meta-val">Semaine Emotion Design</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Type</dt><dd class="cs-meta-val">UX Research · Concept</dd></div>
-    <div class="cs-meta-item"><dt class="cs-meta-label">Année</dt><dd class="cs-meta-val">Mastère A4</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Année</dt><dd class="cs-meta-val">2024, Mastère A4</dd></div>
   </dl>
 
   <div class="cs-cta">
@@ -97,22 +105,23 @@
 
     <ul class="stats-grid">
       <li class="stat-card card">
-        <div class="stat-num">1.2M</div>
-        <div class="stat-label">voyageurs par jour sur le RER A</div>
+        <div class="stat-num">1,2 M</div>
+        <div class="stat-label">voyageurs par jour sur le RER A (estimation)</div>
       </li>
       <li class="stat-card card">
         <div class="stat-num">20 min</div>
-        <div class="stat-label">perdues en moyenne dans la cohue aux heures de pointe</div>
+        <div class="stat-label">perdues en moyenne dans la cohue aux heures de pointe (hypothèse)</div>
       </li>
       <li class="stat-card card">
-        <div class="stat-num">72%</div>
-        <div class="stat-label">des usagers déclarent ressentir du stress lors de leur trajet</div>
+        <div class="stat-num">72 %</div>
+        <div class="stat-label">des usagers ressentiraient du stress lors de leur trajet (hypothèse)</div>
       </li>
       <li class="stat-card card">
         <div class="stat-num">3</div>
-        <div class="stat-label">trains manqués en moyenne par semaine et par usager</div>
+        <div class="stat-label">trains manqués en moyenne par semaine et par usager (hypothèse)</div>
       </li>
     </ul>
+    <p class="cs-note"><strong>Chiffres de cadrage.</strong> Ces quatre données sont des hypothèses de travail retenues par l'équipe pour situer le problème. Elles n'ont pas été vérifiées auprès de sources officielles (RATP, Île-de-France Mobilités).</p>
 
     <blockquote class="cs-quote">
       <p>« Je suis petite, quand les portes s'ouvrent, c'est violent. Les gens poussent, personne ne respecte rien. J'ai déjà eu des crises d'angoisse tellement c'est stressant. »</p>
@@ -267,7 +276,7 @@
 </main>
 
 <footer class="foot">
-  <span class="foot-copy">© 2026 Samuel V.</span>
+  <span class="foot-copy">© 2026 Samuel Voloch</span>
   <span class="foot-copy">Île-de-France</span>
 </footer>
 

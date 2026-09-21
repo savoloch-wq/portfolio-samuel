@@ -3,12 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Samuel V. · UX/UI Designer</title>
+<title>Samuel Voloch · UX/UI Designer</title>
+<meta name="author" content="Samuel Voloch">
 <meta name="description" content="Je suis Samuel, et je résous ce que vous ne savez pas encore nommer. UX/UI Designer basé en Île-de-France.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Samuel Voloch","jobTitle":"UX/UI Designer","url":"https://portfolio-samuel-blond.vercel.app","address":{"@type":"PostalAddress","addressRegion":"Île-de-France","addressCountry":"FR"}}
+</script>
 <script src="script.js" defer></script>
 </head>
 <body>
@@ -25,8 +29,9 @@
 </div>
 
 <nav class="nav" aria-label="Navigation principale">
-  <a href="#hero" class="nav-logo">SAMUEL V.</a>
-  <ul class="nav-links">
+  <a href="#hero" class="nav-logo">SAMUEL VOLOCH</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu"><span class="nav-toggle-icon" aria-hidden="true"></span>Menu</button>
+  <ul class="nav-links" id="nav-menu">
     <li><a href="#work">Travaux</a></li>
     <li><a href="#about">À propos</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -55,7 +60,7 @@
   <section id="about" class="section">
     <h2 class="sec-title">À Propos</h2>
     <div class="about-text">
-      <p>Je m'appelle Samuel V. Je suis UX/UI Designer basé en Île-de-France, spécialisé dans l'accessibilité et le design inclusif.</p>
+      <p>Je m'appelle Samuel Voloch. Je suis UX/UI Designer basé en Île-de-France, spécialisé dans l'accessibilité et le design inclusif.</p>
       <p>Mon parcours a commencé par deux ans d'alternance chez Courir, où j'ai travaillé à l'intersection du webdesign et de l'animation e-commerce — concevoir des interfaces qui tiennent la promesse d'une marque tout en guidant l'utilisateur sans qu'il s'en rende compte.</p>
       <p>Titulaire d'un Mastère en UX Design Interactif, je m'intéresse particulièrement aux expériences qui fonctionnent pour tout le monde — pas seulement pour l'utilisateur idéal. Le RGAA n'est pas une contrainte dans mon travail, c'est un point de départ.</p>
       <p>Je suis actuellement disponible en CDI et en freelance.</p>
@@ -83,9 +88,9 @@
     </div>
     <p class="filter-status" id="filter-status" role="status"></p>
 
-    <ul class="proj-scroll" id="proj-list" role="list" aria-label="Projets">
+    <ul class="proj-grid" id="proj-list" role="list" aria-label="Projets">
 
-      <li class="proj-item" data-cat="ux ui" data-year="2024">
+      <li class="proj-item" data-cat="ux ui" data-year="2023 2024 2025">
         <a class="proj-card" href="projet-courir.html" aria-labelledby="p1-name">
           <div class="proj-thumb">
             <span class="proj-num" aria-hidden="true">01</span>
@@ -95,7 +100,7 @@
             <p class="proj-tag">E-Commerce · UX Design</p>
             <h3 class="proj-name" id="p1-name">Parcours omnicanal : Courir</h3>
             <p class="proj-desc">Refonte des pages services omnicanaux : clarifier l'offre, réduire le défilement et offrir une navigation fluide sur desktop et mobile.</p>
-            <div class="proj-footer"><span class="proj-year">2024</span><span class="proj-cta">Voir le projet <span aria-hidden="true">→</span></span></div>
+            <div class="proj-footer"><span class="proj-year">2023 à 2025</span><span class="proj-cta">Voir le projet <span aria-hidden="true">→</span></span></div>
           </div>
         </a>
       </li>
@@ -105,6 +110,7 @@
           <div class="proj-thumb">
             <span class="proj-num" aria-hidden="true">02</span>
             <img src="image_22.png" alt="" loading="lazy" decoding="async">
+            <span class="proj-credit">Visuel : droits réservés</span>
           </div>
           <div class="proj-body">
             <p class="proj-tag">Site interactif · Direction artistique</p>
@@ -150,7 +156,7 @@
           <div class="proj-thumb">
             <span class="proj-num" aria-hidden="true">05</span>
             <img src="mila-okta-safitri-QBdipcCUViI-unsplash.png" alt="" loading="lazy" decoding="async">
-            <span class="proj-credit">Photo · Unsplash</span>
+            <span class="proj-credit">Photo : Mila Okta Safitri / Unsplash</span>
           </div>
           <div class="proj-body">
             <p class="proj-tag">Design Systémique · UX Research</p>
@@ -164,14 +170,6 @@
     </ul>
 
     <p class="proj-empty" id="proj-empty" hidden>Aucun projet ne correspond à ces filtres. <button type="button" id="filter-reset">Réinitialiser les filtres</button></p>
-
-    <div class="scroll-hint">
-      <span class="scroll-hint-text">Défiler</span>
-      <div class="scroll-hint-arrows">
-        <button type="button" class="scroll-hint-btn" id="sh-prev" aria-label="Projets précédents" aria-controls="proj-list"><span aria-hidden="true">←</span></button>
-        <button type="button" class="scroll-hint-btn" id="sh-next" aria-label="Projets suivants" aria-controls="proj-list"><span aria-hidden="true">→</span></button>
-      </div>
-    </div>
   </section>
 
   <section id="process" class="section">
@@ -272,7 +270,7 @@
 </main>
 
 <footer class="foot">
-  <span class="foot-copy">© 2026 Samuel V.</span>
+  <span class="foot-copy">© 2026 Samuel Voloch</span>
   <span class="foot-copy">Île-de-France</span>
 </footer>
 

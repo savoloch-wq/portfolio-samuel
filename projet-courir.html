@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parcours omnicanal : Courir · Samuel V.</title>
+<title>Parcours omnicanal : Courir · Samuel Voloch</title>
+<meta name="author" content="Samuel Voloch">
 <meta name="description" content="Refonte des pages services omnicanaux Courir — UX Design, wireframes, prototypage Figma, version web et mobile.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,15 +18,15 @@
 .cs-step { display: flex; align-items: flex-start; gap: 20px; padding: 20px 24px; border-bottom: 1px solid rgba(251,239,12,.08); }
 .cs-step:last-child { border-bottom: 0; }
 .cs-step-n { min-width: 24px; margin-top: 2px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--y); }
-.cs-step-title { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+.cs-step-title { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
 .cs-step-text { font-size: 13px; color: var(--dim); line-height: 1.6; }
 
 /* Autres missions */
 .missions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
 .mission { padding: 24px; }
-.mission-kind { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 10px; }
+.mission-kind { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 10px; }
 .mission-name { font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
-.mission-text { font-size: 12px; color: var(--dim); line-height: 1.7; }
+.mission-text { font-size: 13px; color: var(--dim); line-height: 1.7; }
 
 .cs-cta--inline { margin-bottom: 40px; }
 
@@ -47,8 +48,9 @@
 </div>
 
 <nav class="nav" aria-label="Navigation principale">
-  <a href="index.html" class="nav-logo">SAMUEL V.</a>
-  <ul class="nav-links">
+  <a href="index.html" class="nav-logo">SAMUEL VOLOCH</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu"><span class="nav-toggle-icon" aria-hidden="true"></span>Menu</button>
+  <ul class="nav-links" id="nav-menu">
     <li><a href="index.html#work">Travaux</a></li>
     <li><a href="index.html#about">À propos</a></li>
     <li><a href="index.html#contact">Contact</a></li>
@@ -63,11 +65,17 @@
   <h1 class="cs-title">Courir —<br><em>UX, Webdesign</em><br>&amp; Production</h1>
   <p class="cs-intro">Repenser les pages dédiées aux services omnicanaux de Courir pour maximiser leur exposition, clarifier l'offre et offrir une expérience de navigation fluide sur desktop et mobile.</p>
 
+  <dl class="cs-brief">
+    <div class="cs-brief-row"><dt class="cs-brief-label">Rôle</dt><dd class="cs-brief-val">UX/UI Designer en alternance : du brief aux maquettes Figma web et mobile, puis production visuelle pour le site.</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Contexte</dt><dd class="cs-brief-val">Alternance chez Courir, de 2023 à 2025. Les pages des services omnicanaux (E-réservation, Click &amp; Collect…) étaient longues à parcourir et peu claires.</dd></div>
+    <div class="cs-brief-row"><dt class="cs-brief-label">Résultat</dt><dd class="cs-brief-val">Ma version des maquettes a été retenue lors des réunions de validation, et les visuels sont intégrés en production sur courir.com.</dd></div>
+  </dl>
+
   <dl class="cs-meta">
     <div class="cs-meta-item"><dt class="cs-meta-label">Rôle</dt><dd class="cs-meta-val">UX/UI Designer</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Outils</dt><dd class="cs-meta-val">Figma</dd></div>
     <div class="cs-meta-item"><dt class="cs-meta-label">Supports</dt><dd class="cs-meta-val">Web · Mobile</dd></div>
-    <div class="cs-meta-item"><dt class="cs-meta-label">Année</dt><dd class="cs-meta-val">2023 à 2024</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Année</dt><dd class="cs-meta-val">2023 à 2025</dd></div>
   </dl>
 
   <figure class="shot shot-hero">
@@ -255,7 +263,7 @@
 </main>
 
 <footer class="foot">
-  <span class="foot-copy">© 2026 Samuel V.</span>
+  <span class="foot-copy">© 2026 Samuel Voloch</span>
   <span class="foot-copy">Île-de-France</span>
 </footer>
 

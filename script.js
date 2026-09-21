@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Samuel V. · Portfolio · script partagé par toutes les pages
+   Samuel Voloch · Portfolio · script partagé par toutes les pages
    Chaque module vérifie que les éléments dont il a besoin existent :
    le même fichier sert donc pour l'accueil et pour les pages projet.
    ========================================================================== */
@@ -63,7 +63,14 @@
   function backToTop() {
     const btn = $('#back-top');
     if (!btn) return;
-    const toggle = () => btn.classList.toggle('is-visible', scrollY > 400);
+    const small = matchMedia('(max-width: 768px)');
+    let lastY = scrollY;
+    // Sur mobile le bouton n'apparaît qu'en remontant : il ne recouvre pas le contenu pendant la lecture.
+    const toggle = () => {
+      const y = scrollY, up = y < lastY - 4;
+      if (Math.abs(y - lastY) > 4) lastY = y;
+      btn.classList.toggle('is-visible', y > 400 && (!small.matches || up));
+    };
     addEventListener('scroll', toggle, { passive: true });
     toggle();
     btn.addEventListener('click', () => {
@@ -82,45 +89,23 @@
     }, { threshold: 0.15 }).observe(target);
   }
 
-  /* ---------- Carrousel de projets : flèches + glisser à la souris ---------- */
-  function carousel() {
-    const list = $('#proj-list'), prev = $('#sh-prev'), next = $('#sh-next');
-    if (!list || !prev || !next) return;
-
-    const step = () => {
-      const item = $('.proj-item:not([hidden])', list);
-      return item ? item.getBoundingClientRect().width + 16 : 340;
+  /* ---------- Menu mobile : bouton « Menu » qui ouvre les liens de navigation ---------- */
+  function navMenu() {
+    const btn = $('.nav-toggle'), menu = $('#nav-menu');
+    if (!btn || !menu) return;
+    const set = (open) => {
+      menu.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
     };
-    const update = () => {
-      prev.disabled = list.scrollLeft <= 2;
-      next.disabled = list.scrollLeft >= list.scrollWidth - list.clientWidth - 2;
-    };
-    prev.addEventListener('click', () => list.scrollBy({ left: -step(), behavior: scrollBehavior }));
-    next.addEventListener('click', () => list.scrollBy({ left:  step(), behavior: scrollBehavior }));
-    list.addEventListener('scroll', update, { passive: true });
-    addEventListener('resize', update);
-    update();
-
-    // Glisser à la souris. Un glissement ne doit jamais déclencher le clic sur la carte.
-    let down = false, moved = false, startX = 0, startLeft = 0;
-    list.addEventListener('pointerdown', (e) => {
-      if (e.pointerType !== 'mouse' || e.button !== 0) return;
-      down = true; moved = false; startX = e.clientX; startLeft = list.scrollLeft;
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { set(false); btn.focus(); }
     });
-    addEventListener('pointermove', (e) => {
-      if (!down) return;
-      const dx = e.clientX - startX;
-      if (!moved && Math.abs(dx) > 5) { moved = true; list.classList.add('is-dragging'); }
-      if (moved) list.scrollLeft = startLeft - dx * 1.2;
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav')) set(false);
     });
-    addEventListener('pointerup', () => {
-      if (!down) return;
-      down = false;
-      list.classList.remove('is-dragging');
-      setTimeout(() => { moved = false; }, 0);
-    });
-    list.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
-    list.addEventListener('dragstart', (e) => e.preventDefault());
+    matchMedia('(min-width: 769px)').addEventListener('change', (e) => { if (e.matches) set(false); });
   }
 
   /* ---------- Filtres : catégorie (UX / UI) + année ---------- */
@@ -136,14 +121,12 @@
       let count = 0;
       items.forEach((li) => {
         const matchCat  = state.cat === 'all' || li.dataset.cat.split(' ').includes(state.cat);
-        const matchYear = state.year === 'all' || li.dataset.year === state.year;
+        const matchYear = state.year === 'all' || li.dataset.year.split(' ').includes(state.year);
         li.hidden = !(matchCat && matchYear);
         if (!li.hidden) count++;
       });
       empty.hidden = count > 0;
       status.textContent = count === 0 ? 'Aucun projet' : count + (count > 1 ? ' projets affichés' : ' projet affiché');
-      list.scrollLeft = 0;
-      list.dispatchEvent(new Event('scroll'));   // met à jour les flèches
     };
 
     const select = (group, value) => {
@@ -247,7 +230,7 @@
   cursor();
   backToTop();
   floatContact();
-  carousel();
+  navMenu();
   filters();
   images();
   lightbox();
