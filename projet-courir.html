@@ -3,403 +3,266 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parcours Omnicanal — Courir · Samuel V.</title>
+<title>Parcours omnicanal : Courir · Samuel V.</title>
 <meta name="description" content="Refonte des pages services omnicanaux Courir — UX Design, wireframes, prototypage Figma, version web et mobile.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-@font-face {
-  font-family: 'VCR OSD Mono';
-  src: url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff') format('woff');
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --y:#FBEF0C;
-  --bg:#080808;
-  --card:#101010;
-  --card2:#141414;
-  --white:#F0EDE4;
-  --dim:rgba(240,237,228,0.45);
-  --mono:'VCR OSD Mono','Courier New',monospace;
-  --sans:'Work Sans','Arial',sans-serif;
-}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;cursor:none;}
+.shot-hero { margin-bottom: 64px; }
 
-/* ── FOND ── */
-#bg{position:fixed;inset:0;z-index:0;background-color:#0d0d0d;}
-#bg::before{
-  content:'';position:absolute;inset:-50%;width:200%;height:200%;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
-  opacity:0.18;animation:snow 0.08s steps(1) infinite;
-}
-@keyframes snow{
-  0%{transform:translate(0,0);}10%{transform:translate(-3%,-4%);}20%{transform:translate(4%,2%);}
-  30%{transform:translate(-2%,5%);}40%{transform:translate(3%,-3%);}50%{transform:translate(-5%,1%);}
-  60%{transform:translate(2%,4%);}70%{transform:translate(-4%,-2%);}80%{transform:translate(5%,3%);}
-  90%{transform:translate(-1%,-5%);}100%{transform:translate(3%,2%);}
-}
-#scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 2px,rgba(0,0,0,0.10) 2px,rgba(0,0,0,0.10) 4px);}
-#vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 20%,rgba(0,0,0,0.65) 100%);}
-#glitch-el{position:fixed;left:0;right:0;height:1px;background:rgba(251,239,12,0.5);z-index:4;pointer-events:none;opacity:0;}
+/* Démarche en étapes */
+.cs-steps { margin-top: 20px; border: 1px solid var(--line); list-style: none; }
+.cs-step { display: flex; align-items: flex-start; gap: 20px; padding: 20px 24px; border-bottom: 1px solid rgba(251,239,12,.08); }
+.cs-step:last-child { border-bottom: 0; }
+.cs-step-n { min-width: 24px; margin-top: 2px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--y); }
+.cs-step-title { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+.cs-step-text { font-size: 13px; color: var(--dim); line-height: 1.6; }
 
-/* ── CURSOR ── */
-#cur{position:fixed;width:8px;height:8px;background:var(--y);border-radius:50%;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
-#cur-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(251,239,12,0.4);border-radius:50%;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+/* Autres missions */
+.missions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+.mission { padding: 24px; }
+.mission-kind { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 10px; }
+.mission-name { font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+.mission-text { font-size: 12px; color: var(--dim); line-height: 1.7; }
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;border-bottom:0.5px solid rgba(251,239,12,0.08);backdrop-filter:blur(8px);background:rgba(8,8,8,0.75);}
-.nav-logo{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;color:var(--white);text-decoration:none;}
-.nav-back{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
-.nav-back:hover{color:var(--y);}
+.cs-cta--inline { margin-bottom: 40px; }
 
-/* ── PAGE ── */
-.page{position:relative;z-index:10;max-width:900px;margin:0 auto;padding:120px 60px 100px;}
-
-/* ── HERO ── */
-.cs-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.5);margin-bottom:16px;opacity:0;animation:up .5s .1s ease forwards;}
-.cs-title{font-family:var(--sans);font-size:clamp(32px,4.5vw,56px);font-weight:700;letter-spacing:-0.02em;line-height:1.05;color:var(--white);margin-bottom:20px;opacity:0;animation:up .6s .25s ease forwards;}
-.cs-title em{font-style:normal;color:var(--y);}
-.cs-intro{font-size:16px;font-weight:300;color:var(--dim);line-height:1.75;max-width:660px;margin-bottom:40px;opacity:0;animation:up .6s .4s ease forwards;}
-
-/* ── META ── */
-.cs-meta{display:flex;gap:0;margin-bottom:56px;border:1px solid rgba(251,239,12,0.1);opacity:0;animation:up .5s .55s ease forwards;}
-.cs-meta-item{flex:1;padding:20px 24px;border-right:1px solid rgba(251,239,12,0.1);}
-.cs-meta-item:last-child{border-right:none;}
-.cs-meta-label{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:8px;}
-.cs-meta-val{font-family:var(--mono);font-size:12px;color:var(--white);}
-
-/* ── VISUEL HERO ── */
-.cs-visual-hero{width:100%;margin-bottom:64px;border:1px solid rgba(251,239,12,0.1);overflow:hidden;}
-.cs-visual-hero img{width:100%;height:auto;display:block;}
-
-/* ── SECTIONS ── */
-.cs-section{margin-bottom:56px;}
-.cs-section-num{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:10px;}
-.cs-section-title{font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:18px;}
-.cs-section-body{font-size:15px;font-weight:300;color:var(--dim);line-height:1.8;}
-
-/* ── CHIPS ── */
-.cs-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
-.cs-chip{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;border:0.5px solid rgba(251,239,12,0.2);color:rgba(251,239,12,0.55);padding:7px 14px;}
-
-/* ── GRILLE 2 VISUELS ── */
-.cs-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
-.cs-grid-2 img{width:100%;height:auto;display:block;border:1px solid rgba(251,239,12,0.08);}
-
-/* ── VISUEL FULL ── */
-.cs-visual-full{width:100%;margin-top:24px;border:1px solid rgba(251,239,12,0.08);overflow:hidden;}
-.cs-visual-full img{width:100%;height:auto;display:block;}
-
-/* ── ÉTAPES ── */
-.cs-steps{display:flex;flex-direction:column;gap:0;margin-top:20px;border:1px solid rgba(251,239,12,0.1);}
-.cs-step{padding:20px 24px;border-bottom:1px solid rgba(251,239,12,0.06);display:flex;gap:20px;align-items:flex-start;}
-.cs-step:last-child{border-bottom:none;}
-.cs-step-n{font-family:var(--mono);font-size:11px;color:var(--y);letter-spacing:0.14em;min-width:24px;margin-top:2px;}
-.cs-step-body{}
-.cs-step-title{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:0.06em;color:var(--white);margin-bottom:6px;text-transform:uppercase;}
-.cs-step-text{font-size:13px;color:var(--dim);line-height:1.6;}
-
-/* ── QUOTE ── */
-.cs-quote{border-left:2px solid var(--y);padding:16px 24px;margin-top:24px;background:rgba(251,239,12,0.03);}
-.cs-quote p{font-size:14px;font-style:italic;color:var(--dim);line-height:1.7;}
-
-/* ── DIVIDER ── */
-.cs-divider{border:none;border-top:0.5px solid rgba(251,239,12,0.08);margin:56px 0;}
-
-/* ── NAV PROJETS ── */
-.cs-nav-proj{display:flex;justify-content:space-between;align-items:center;}
-.cs-nav-link{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
-.cs-nav-link:hover{color:var(--y);}
-.cs-nav-label{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(251,239,12,0.35);margin-bottom:4px;}
-
-/* ── BOUTON FLOTTANT ── */
-#float-contact{position:fixed;bottom:32px;right:32px;z-index:200;font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#080808;background:var(--y);border:none;padding:13px 22px;border-radius:100px;text-decoration:none;cursor:pointer;transition:transform .2s,opacity .3s;box-shadow:0 4px 24px rgba(251,239,12,0.18);}
-#float-contact:hover{transform:translateY(-2px);}
-
-@keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-
-@media(max-width:768px){
-  nav{padding:0 24px;}
-  .page{padding:100px 24px 80px;}
-  .cs-meta{flex-direction:column;}
-  .cs-meta-item{border-right:none;border-bottom:1px solid rgba(251,239,12,0.1);}
-  .cs-meta-item:last-child{border-bottom:none;}
-  .cs-grid-2{grid-template-columns:1fr;}
-}
-
-.nav-links{display:flex;gap:40px;list-style:none;}
-.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
-.nav-links a:hover{color:var(--y);}
-.nav-status{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--dim);display:flex;align-items:center;gap:7px;}
-.blink{width:5px;height:5px;border-radius:50%;background:var(--y);animation:blink 1.4s step-end infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-@media(max-width:768px){.nav-links{display:none;}}
+@media (max-width: 768px) { .missions { grid-template-columns: 1fr; } }
 </style>
+<script src="script.js" defer></script>
 </head>
 <body>
 
-<div id="bg"></div>
-<div id="scanlines"></div>
-<div id="vignette"></div>
-<div id="glitch-el"></div>
-<div id="cur"></div>
-<div id="cur-ring"></div>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
-<nav>
+<div class="fx" aria-hidden="true">
+  <div id="bg"></div>
+  <div id="scanlines"></div>
+  <div id="vignette"></div>
+  <div id="glitch-el"></div>
+  <div id="cur"></div>
+  <div id="cur-ring"></div>
+</div>
+
+<nav class="nav" aria-label="Navigation principale">
   <a href="index.html" class="nav-logo">SAMUEL V.</a>
   <ul class="nav-links">
     <li><a href="index.html#work">Travaux</a></li>
     <li><a href="index.html#about">À propos</a></li>
     <li><a href="index.html#contact">Contact</a></li>
-    <li><a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank">Mon CV</a></li>
+    <li><a href="https://drive.google.com/file/d/10iyQHXAq80rBVVJ4hmMgtF6LsTq1H88y/view?usp=sharing" target="_blank" rel="noopener noreferrer">Mon CV<span class="sr-only"> (nouvel onglet)</span></a></li>
   </ul>
-  <div class="nav-status"><div class="blink"></div><span>Disponible</span></div>
+  <p class="nav-status"><span class="blink" aria-hidden="true"></span>Disponible</p>
 </nav>
 
-<div class="page">
+<main id="contenu" class="main cs">
 
-  <!-- HERO -->
-  <div class="cs-tag">UX Design · Webdesign · Production · 2023–2025</div>
-  <h1 class="cs-title">Courir —<br><em>UX, Webdesign</em><br>& Production</h1>
+  <p class="cs-tag">UX Design · Webdesign · Production · 2023 à 2025</p>
+  <h1 class="cs-title">Courir —<br><em>UX, Webdesign</em><br>&amp; Production</h1>
   <p class="cs-intro">Repenser les pages dédiées aux services omnicanaux de Courir pour maximiser leur exposition, clarifier l'offre et offrir une expérience de navigation fluide sur desktop et mobile.</p>
 
-  <!-- META -->
-  <div class="cs-meta">
-    <div class="cs-meta-item"><div class="cs-meta-label">Rôle</div><div class="cs-meta-val">UX-UI Designer</div></div>
-    <div class="cs-meta-item"><div class="cs-meta-label">Outils</div><div class="cs-meta-val">Figma</div></div>
-    <div class="cs-meta-item"><div class="cs-meta-label">Supports</div><div class="cs-meta-val">Web · Mobile</div></div>
-    <div class="cs-meta-item"><div class="cs-meta-label">Année</div><div class="cs-meta-val">2023 – 2024</div></div>
-  </div>
+  <dl class="cs-meta">
+    <div class="cs-meta-item"><dt class="cs-meta-label">Rôle</dt><dd class="cs-meta-val">UX/UI Designer</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Outils</dt><dd class="cs-meta-val">Figma</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Supports</dt><dd class="cs-meta-val">Web · Mobile</dd></div>
+    <div class="cs-meta-item"><dt class="cs-meta-label">Année</dt><dd class="cs-meta-val">2023 à 2024</dd></div>
+  </dl>
 
-  <!-- VISUEL HERO -->
-  <div class="cs-visual-hero">
-    <img src="Mockup Courir.png" alt="Mockup multi-écrans du projet Courir — parcours omnicanal">
-  </div>
+  <figure class="shot shot-hero">
+    <img src="Mockup%20Courir.png" alt="Maquettes du projet Courir présentées sur plusieurs écrans : parcours omnicanal">
+  </figure>
 
-  <!-- CONTEXTE -->
-  <div class="cs-section">
-    <div class="cs-section-num">01</div>
-    <div class="cs-section-title">Le contexte</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">01</p>
+    <h2 class="cs-section-title">Le contexte</h2>
     <p class="cs-section-body">
       Les pages dédiées aux services omnicanaux de Courir souffraient de plusieurs lacunes : défilement excessif pour accéder aux informations, design peu attractif et navigation peu intuitive. Les utilisateurs ne comprenaient pas rapidement ce que la marque proposait au-delà de la vente en ligne.
       <br><br>
-      L'objectif était double : maximiser l'exposition des services (E-réservation, Click & Collect, Commande en magasin…) et créer une interface visuellement engageante qui encourage l'exploration.
+      L'objectif était double : maximiser l'exposition des services (E-réservation, Click &amp; Collect, Commande en magasin…) et créer une interface visuellement engageante qui encourage l'exploration.
     </p>
-  </div>
+  </section>
 
-  <!-- DÉMARCHE -->
-  <div class="cs-section">
-    <div class="cs-section-num">02</div>
-    <div class="cs-section-title">La démarche</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">02</p>
+    <h2 class="cs-section-title">La démarche</h2>
     <p class="cs-section-body">Une approche méthodique en plusieurs étapes, de l'analyse des besoins à la livraison des maquettes finales.</p>
 
-    <div class="cs-steps">
-      <div class="cs-step">
-        <div class="cs-step-n">01</div>
-        <div class="cs-step-body">
-          <div class="cs-step-title">Analyse des besoins & brief</div>
-          <div class="cs-step-text">Étude des comportements utilisateurs en ligne, identification des points de friction actuels. Analyse des exigences fonctionnelles et esthétiques à partir du brief remis par l'équipe.</div>
+    <ol class="cs-steps">
+      <li class="cs-step">
+        <span class="cs-step-n" aria-hidden="true">01</span>
+        <div>
+          <h3 class="cs-step-title">Analyse des besoins &amp; brief</h3>
+          <p class="cs-step-text">Étude des comportements utilisateurs en ligne, identification des points de friction actuels. Analyse des exigences fonctionnelles et esthétiques à partir du brief remis par l'équipe.</p>
         </div>
-      </div>
-      <div class="cs-step">
-        <div class="cs-step-n">02</div>
-        <div class="cs-step-body">
-          <div class="cs-step-title">Veille concurrentielle</div>
-          <div class="cs-step-text">Analyse stratégique des sites concurrents pour identifier les tendances et les meilleures pratiques du secteur, afin de positionner les pages de manière différenciante.</div>
+      </li>
+      <li class="cs-step">
+        <span class="cs-step-n" aria-hidden="true">02</span>
+        <div>
+          <h3 class="cs-step-title">Veille concurrentielle</h3>
+          <p class="cs-step-text">Analyse stratégique des sites concurrents pour identifier les tendances et les meilleures pratiques du secteur, afin de positionner les pages de manière différenciante.</p>
         </div>
-      </div>
-      <div class="cs-step">
-        <div class="cs-step-n">03</div>
-        <div class="cs-step-body">
-          <div class="cs-step-title">Wireframes & maquettes</div>
-          <div class="cs-step-text">Création de wireframes pour établir la structure de base, puis maquettes haute-fidélité sur Figma pour les versions web et mobile. Plusieurs itérations proposées par support.</div>
+      </li>
+      <li class="cs-step">
+        <span class="cs-step-n" aria-hidden="true">03</span>
+        <div>
+          <h3 class="cs-step-title">Wireframes &amp; maquettes</h3>
+          <p class="cs-step-text">Création de wireframes pour établir la structure de base, puis maquettes haute-fidélité sur Figma pour les versions web et mobile. Plusieurs itérations proposées par support.</p>
         </div>
-      </div>
-      <div class="cs-step">
-        <div class="cs-step-n">04</div>
-        <div class="cs-step-body">
-          <div class="cs-step-title">Tests internes & itérations</div>
-          <div class="cs-step-text">Sessions de tests avec l'équipe pour recueillir des retours sur l'expérience utilisateur. Les maquettes ont été affinées en 2 à 3 versions par support jusqu'à validation finale.</div>
+      </li>
+      <li class="cs-step">
+        <span class="cs-step-n" aria-hidden="true">04</span>
+        <div>
+          <h3 class="cs-step-title">Tests internes &amp; itérations</h3>
+          <p class="cs-step-text">Sessions de tests avec l'équipe pour recueillir des retours sur l'expérience utilisateur. Les maquettes ont été affinées en 2 à 3 versions par support jusqu'à validation finale.</p>
         </div>
-      </div>
-    </div>
+      </li>
+    </ol>
 
-    <div class="cs-chips">
-      <div class="cs-chip">Brief</div>
-      <div class="cs-chip">Analyse UX</div>
-      <div class="cs-chip">Veille concurrentielle</div>
-      <div class="cs-chip">Wireframes</div>
-      <div class="cs-chip">Figma</div>
-      <div class="cs-chip">Tests internes</div>
-      <div class="cs-chip">Responsive</div>
-    </div>
-  </div>
+    <ul class="cs-chips">
+      <li class="cs-chip">Brief</li>
+      <li class="cs-chip">Analyse UX</li>
+      <li class="cs-chip">Veille concurrentielle</li>
+      <li class="cs-chip">Wireframes</li>
+      <li class="cs-chip">Figma</li>
+      <li class="cs-chip">Tests internes</li>
+      <li class="cs-chip">Responsive</li>
+    </ul>
+  </section>
 
-  <!-- VISUELS DESKTOP -->
-  <div class="cs-section">
-    <div class="cs-section-num">03</div>
-    <div class="cs-section-title">Solution — Version desktop</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">03</p>
+    <h2 class="cs-section-title">Solution — Version desktop</h2>
     <p class="cs-section-body">
       Une architecture en deux niveaux : une page générale listant tous les services avec des CTAs simples et épurés (maximum deux lignes explicatives par service), et des pages dédiées pour chaque service avec leur propre design.
     </p>
-    <div class="cs-visual-full">
-      <img src="Omni.png" alt="Page services omnicanaux Courir — version desktop finale">
-    </div>
-    <div class="cs-grid-2" style="margin-top:12px;">
-      <img src="Eresaweb.png" alt="Page E-Réservation Courir — version desktop">
-      <img src="Eresa desktop.png" alt="Page E-Réservation Courir — mockup desktop">
+    <figure class="shot shot-full">
+      <img src="Omni.png" alt="Page services omnicanaux Courir, version desktop finale" loading="lazy" decoding="async">
+    </figure>
+    <div class="shot-grid">
+      <figure class="shot"><img src="Eresaweb.png" alt="Page E-réservation Courir, version desktop" loading="lazy" decoding="async"></figure>
+      <figure class="shot"><img src="Eresa%20desktop.png" alt="Page E-réservation Courir, mockup desktop" loading="lazy" decoding="async"></figure>
     </div>
 
-    <div class="cs-quote">
+    <blockquote class="cs-quote">
       <p>« Initialement, la demande était de rendre ces pages très utilitaires. J'ai voulu les rendre non seulement fonctionnelles, mais aussi esthétiquement plaisantes — en combinant interface intuitive et design attrayant. »</p>
-    </div>
-  </div>
+    </blockquote>
+  </section>
 
-  <!-- VISUELS MOBILE -->
-  <div class="cs-section">
-    <div class="cs-section-num">04</div>
-    <div class="cs-section-title">Solution — Version mobile</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">04</p>
+    <h2 class="cs-section-title">Solution — Version mobile</h2>
     <p class="cs-section-body">
       Sur mobile, j'ai introduit un menu déroulant pour obtenir un premier aperçu des services sans surcharger la page. En cliquant, l'utilisateur accède à une description détaillée — fonctionnalité et esthétisme réunis pour une navigation épurée.
     </p>
-    <div class="cs-grid-2">
-      <img src="Omni mobile.png" alt="Page services omnicanaux Courir — version mobile finale">
-      <img src="Omni_mobile-removebg-preview.png" alt="Mockup mobile services Courir">
+    <div class="shot-grid">
+      <figure class="shot"><img src="Omni%20mobile.png" alt="Page services omnicanaux Courir, version mobile finale" loading="lazy" decoding="async"></figure>
+      <figure class="shot"><img src="Omni_mobile-removebg-preview.png" alt="Mockup mobile des services Courir" loading="lazy" decoding="async"></figure>
     </div>
-  </div>
+  </section>
 
-  <!-- BILAN -->
-  <div class="cs-section">
-    <div class="cs-section-num">05</div>
-    <div class="cs-section-title">Bilan</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">05</p>
+    <h2 class="cs-section-title">Bilan</h2>
     <p class="cs-section-body">
       Le projet a démontré une approche réfléchie et structurée, mettant l'accent sur l'optimisation de l'expérience utilisateur et la satisfaction des besoins des visiteurs.
       <br><br>
       Ce qui m'a le plus marqué : lors des réunions de validation avec mes supérieurs, c'est ma version qui a été retenue. Cette expérience a renforcé ma confiance dans ma capacité à répondre aux attentes tout en apportant ma propre vision créative.
     </p>
-
-    <div class="cs-quote">
+    <blockquote class="cs-quote">
       <p>« Ce projet a été incroyablement enrichissant. Initialement guidé, j'ai pu répondre aux attentes tout en apportant ma vision créative — et c'est ma version qui a été validée. »</p>
-    </div>
+    </blockquote>
+  </section>
+
+  <div class="cs-cta cs-cta--inline">
+    <a href="https://www.courir.com/fr/services" target="_blank" rel="noopener noreferrer" class="btn btn-y">Voir le site Courir<span class="sr-only"> (nouvel onglet)</span></a>
   </div>
 
-
-  <!-- LIEN SITE -->
-  <div style="margin-bottom:40px;">
-    <a href="https://www.courir.com/fr/services" target="_blank" class="pres-btn" style="display:inline-flex;align-items:center;width:fit-content;font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#080808;background:var(--y);padding:12px 28px;text-decoration:none;border-radius:100px;transition:opacity .2s,transform .15s;" onmouseover="this.style.opacity='0.85';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">Voir le site Courir</a>
-  </div>
-
-  <!-- AUTRES MISSIONS -->
-  <div class="cs-section">
-    <div class="cs-section-num">06</div>
-    <div class="cs-section-title">Autres missions</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">06</p>
+    <h2 class="cs-section-title">Autres missions</h2>
     <p class="cs-section-body">En parallèle du projet omnicanal, mes missions quotidiennes en alternance couvraient la production visuelle et la gestion du back-office e-commerce.</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;">
-
-      <div style="background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:24px;">
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:10px;">Production visuelle</div>
-        <div style="font-family:var(--mono);font-size:13px;font-weight:700;text-transform:uppercase;color:var(--white);margin-bottom:12px;">TCB — Top Category Banner</div>
-        <div style="font-size:12px;color:var(--dim);line-height:1.7;">Conception de bannières catégories sur la homepage. Formats web, mobile et tablette sous Photoshop, adaptés aux emplacements définis par l'équipe marketing.</div>
-      </div>
-
-      <div style="background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:24px;">
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:10px;">Production visuelle</div>
-        <div style="font-family:var(--mono);font-size:13px;font-weight:700;text-transform:uppercase;color:var(--white);margin-bottom:12px;">Encarts promotionnels</div>
-        <div style="font-size:12px;color:var(--dim);line-height:1.7;">Création d'encarts pour la page d'accueil : promotions, soldes, mises en avant de marques. Chaque visuel conçu pour capter l'attention et générer des clics vers les pages dédiées.</div>
-      </div>
-
-      <div style="background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:24px;">
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:10px;">Production visuelle</div>
-        <div style="font-family:var(--mono);font-size:13px;font-weight:700;text-transform:uppercase;color:var(--white);margin-bottom:12px;">Pages de marque</div>
-        <div style="font-size:12px;color:var(--dim);line-height:1.7;">Réalisation de pages dédiées à des marques partenaires (Nike, Ryan Koff…) — brief reçu de l'équipe, création sous Photoshop, intégration sur le site web et mobile.</div>
-      </div>
-
-      <div style="background:var(--card);border:1px solid rgba(251,239,12,0.1);padding:24px;">
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(251,239,12,0.4);margin-bottom:10px;">Back-office</div>
-        <div style="font-family:var(--mono);font-size:13px;font-weight:700;text-transform:uppercase;color:var(--white);margin-bottom:12px;">Salesforce Commerce Cloud</div>
-        <div style="font-size:12px;color:var(--dim);line-height:1.7;">Formation et utilisation du back-office SFCC pour intégrer les visuels directement sur le site. Gestion des emplacements, publication des campagnes, vérification de l'affichage multi-supports.</div>
-      </div>
-
+    <div class="missions">
+      <article class="mission card">
+        <p class="mission-kind">Production visuelle</p>
+        <h3 class="mission-name">TCB — Top Category Banner</h3>
+        <p class="mission-text">Conception de bannières catégories sur la homepage. Formats web, mobile et tablette sous Photoshop, adaptés aux emplacements définis par l'équipe marketing.</p>
+      </article>
+      <article class="mission card">
+        <p class="mission-kind">Production visuelle</p>
+        <h3 class="mission-name">Encarts promotionnels</h3>
+        <p class="mission-text">Création d'encarts pour la page d'accueil : promotions, soldes, mises en avant de marques. Chaque visuel conçu pour capter l'attention et générer des clics vers les pages dédiées.</p>
+      </article>
+      <article class="mission card">
+        <p class="mission-kind">Production visuelle</p>
+        <h3 class="mission-name">Pages de marque</h3>
+        <p class="mission-text">Réalisation de pages dédiées à des marques partenaires (Nike, Ryan Koff…) — brief reçu de l'équipe, création sous Photoshop, intégration sur le site web et mobile.</p>
+      </article>
+      <article class="mission card">
+        <p class="mission-kind">Back-office</p>
+        <h3 class="mission-name">Salesforce Commerce Cloud</h3>
+        <p class="mission-text">Formation et utilisation du back-office SFCC pour intégrer les visuels directement sur le site. Gestion des emplacements, publication des campagnes, vérification de l'affichage sur tous les supports.</p>
+      </article>
     </div>
-  </div>
+  </section>
 
-
-  <!-- GALERIE LIVRABLES -->
-  <div class="cs-section">
-    <div class="cs-section-num">07</div>
-    <div class="cs-section-title">Livrables — Pages en production</div>
+  <section class="cs-section">
+    <p class="cs-section-num" aria-hidden="true">07</p>
+    <h2 class="cs-section-title">Livrables — Pages en production</h2>
     <p class="cs-section-body">Aperçu des pages et visuels réalisés et intégrés directement sur courir.com — homepage desktop, mobile, header, push trends et page listing.</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;">
-      <div>
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(251,239,12,0.35);margin-bottom:8px;">Homepage — Desktop (variante A)</div>
-        <img src="Desktop - 16.png" alt="Homepage Courir desktop" style="width:100%;max-height:400px;object-fit:cover;object-position:top;display:block;border:1px solid rgba(251,239,12,0.08);">
-      </div>
-      <div>
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(251,239,12,0.35);margin-bottom:8px;">Homepage — Desktop (variante B)</div>
-        <img src="Desktop - état 1.png" alt="Homepage Courir desktop état 1" style="width:100%;max-height:400px;object-fit:cover;object-position:top;display:block;border:1px solid rgba(251,239,12,0.08);">
-      </div>
-      <div>
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(251,239,12,0.35);margin-bottom:8px;">Homepage — Mobile</div>
-        <img src="iPhone_16_3.png" alt="Homepage Courir mobile" style="width:100%;max-height:400px;object-fit:cover;object-position:top;display:block;border:1px solid rgba(251,239,12,0.08);">
-      </div>
-      <div>
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(251,239,12,0.35);margin-bottom:8px;">Push Trends — Desktop</div>
-        <img src="Push_trend Desktop_2.png" alt="Push trends Courir desktop" style="width:100%;max-height:400px;object-fit:cover;object-position:top;display:block;border:1px solid rgba(251,239,12,0.08);">
-      </div>
+    <div class="shot-grid">
+      <figure class="shot">
+        <figcaption>Homepage — Desktop (variante A)</figcaption>
+        <img src="Desktop%20-%2016.png" alt="Homepage Courir, version desktop, variante A" loading="lazy" decoding="async">
+      </figure>
+      <figure class="shot">
+        <figcaption>Homepage — Desktop (variante B)</figcaption>
+        <img src="Desktop%20-%20état%201.png" alt="Homepage Courir, version desktop, variante B" loading="lazy" decoding="async">
+      </figure>
+      <figure class="shot">
+        <figcaption>Homepage — Mobile</figcaption>
+        <img src="iPhone_16_3.png" alt="Homepage Courir, version mobile" loading="lazy" decoding="async">
+      </figure>
+      <figure class="shot">
+        <figcaption>Push Trends — Desktop</figcaption>
+        <img src="Push_trend%20Desktop_2.png" alt="Push trends Courir, version desktop" loading="lazy" decoding="async">
+      </figure>
     </div>
 
-    <div style="margin-top:12px;">
-      <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(251,239,12,0.35);margin-bottom:8px;">Header — Multi-états</div>
-      <img src="HEADER.png" alt="Header Courir multi-états" style="width:100%;max-height:220px;object-fit:cover;object-position:top;display:block;border:1px solid rgba(251,239,12,0.08);">
-    </div>
-  </div>
+    <figure class="shot shot-full">
+      <figcaption>Header — Tous les états</figcaption>
+      <img src="HEADER.png" alt="Header Courir dans tous ses états" loading="lazy" decoding="async">
+    </figure>
+  </section>
 
-  <div class="cs-divider"></div>
+  <hr class="cs-divider">
 
-  <!-- NAVIGATION -->
-  <div class="cs-nav-proj">
-    <a href="index.html#work" class="cs-nav-link">← Tous les projets</a>
-    <a href="#" class="cs-nav-link">
-      <div style="text-align:right;">
-        <div class="cs-nav-label">Projet suivant</div>
-        <div>Audit et redesign inclusif →</div>
-      </div>
+  <nav class="cs-nav-proj" aria-label="Navigation entre les projets">
+    <a class="cs-nav-link cs-nav-prev" href="projet-design-systemique.html" rel="prev">
+      <span class="cs-nav-label">Projet précédent</span>
+      <span class="cs-nav-title"><span aria-hidden="true">← </span>Rendu Design Systémique</span>
     </a>
-  </div>
+    <a class="cs-nav-link cs-nav-next" href="projet-asaprocky.html" rel="next">
+      <span class="cs-nav-label">Projet suivant</span>
+      <span class="cs-nav-title">Site interactif ASAP Rocky<span aria-hidden="true"> →</span></span>
+    </a>
+  </nav>
+  <p class="cs-all"><a href="index.html#work">Voir tous les projets</a></p>
 
-</div>
+</main>
+
+<footer class="foot">
+  <span class="foot-copy">© 2026 Samuel V.</span>
+  <span class="foot-copy">Île-de-France</span>
+</footer>
 
 <a href="mailto:s.a.voloch@gmail.com" id="float-contact">Me contacter</a>
+<button type="button" id="back-top" aria-label="Retour en haut de la page">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5M5 11l7-7 7 7"/></svg>
+</button>
 
-<script>
-(function(){
-const glEl = document.getElementById('glitch-el');
-let glT = 300;
-function fireGlitch(){
-  glEl.style.top=(window.innerHeight*(0.15+Math.random()*0.7))+'px';
-  glEl.style.opacity='1';
-  setTimeout(()=>{glEl.style.opacity='0';},40+Math.random()*100);
-}
-(function loop(){
-  if(--glT<=0&&Math.random()<0.012){fireGlitch();glT=200+Math.floor(Math.random()*300);}
-  requestAnimationFrame(loop);
-})();
-
-const cur=document.getElementById('cur');
-const ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function lc(){rx+=(mx-rx)*0.11;ry+=(my-ry)*0.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lc);})();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.width='13px';cur.style.height='13px';ring.style.width='44px';ring.style.height='44px';ring.style.borderColor='rgba(251,239,12,0.7)';});
-  el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(251,239,12,0.4)';});
-});
-document.addEventListener('mouseleave',()=>{cur.style.opacity='0';ring.style.opacity='0';});
-document.addEventListener('mouseenter',()=>{cur.style.opacity='1';ring.style.opacity='1';});
-})();
-</script>
 </body>
 </html>
