@@ -117,14 +117,14 @@ footer{padding:24px 60px;border-top:0.5px solid rgba(251,239,12,0.06);display:fl
 #back-top{
   position:fixed;bottom:88px;right:32px;z-index:200;
   font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
-  color:#080808;background:rgba(251,239,12,0.85);border:none;
+  color:#080808;background:var(--y);border:none;
   padding:13px 22px;border-radius:100px;cursor:pointer;
-  box-shadow:0 4px 24px rgba(251,239,12,0.15);
-  opacity:0;pointer-events:none;
-  transition:opacity .3s,transform .3s;
+  box-shadow:0 4px 24px rgba(251,239,12,0.18);
+  display:none;
+  transition:opacity .2s,transform .15s;
 }
-#back-top.visible{opacity:1;pointer-events:auto;}
 #back-top:hover{opacity:0.85;transform:translateY(-2px);}
+#back-top.visible{display:block;}
 </style>
 </head>
 <body>
@@ -386,29 +386,16 @@ const contactSection=document.getElementById('contact');
 const observer=new IntersectionObserver(entries=>{floatBtn.classList.toggle('hidden',entries[0].isIntersecting);},{threshold:0.15});
 observer.observe(contactSection);
 
-/* ── BACK TO TOP / CONTACT TOGGLE ── */
-const backTop = document.getElementById('back-top');
-const floatContact = document.getElementById('float-contact');
-window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY > 400;
-  if(backTop){
-    backTop.style.opacity = scrolled ? '1' : '0';
-    backTop.style.pointerEvents = scrolled ? 'auto' : 'none';
-    backTop.style.transform = scrolled ? 'translateY(0)' : 'translateY(8px)';
-  }
-  if(floatContact){
-    floatContact.style.opacity = scrolled ? '0' : '1';
-    floatContact.style.pointerEvents = scrolled ? 'none' : 'auto';
-    floatContact.style.transform = scrolled ? 'translateY(8px)' : 'translateY(0)';
-  }
-});
-if(backTop) backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+/* ── BACK TO TOP / CONTACT TOGGLE ── */const floatContact = document.getElementById('float-contact');if(backTop) backTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
 /* ── BACK TO TOP ── */
 const backTop = document.getElementById('back-top');
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', function() {
   if(backTop) backTop.classList.toggle('visible', window.scrollY > 400);
 });
-if(backTop) backTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+if(backTop) backTop.addEventListener('click', function() {
+  window.scrollTo({top:0, behavior:'smooth'});
+});
 })();
 </script>
 
