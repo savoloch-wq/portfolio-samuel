@@ -234,11 +234,13 @@ ul, ol { list-style: none; }
 .proj-card:hover { border-color: rgba(251,239,12,.6); transform: translateY(-3px); }
 .proj-thumb { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--card2); display: flex; align-items: center; justify-content: center; }
 .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* voile sombre en haut et en bas : garde le numéro et le crédit lisibles sur une image claire */
+.proj-thumb::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(8,8,8,.6), transparent 35%, transparent 75%, rgba(8,8,8,.5));
+}
 .proj-num { position: absolute; top: 14px; left: 16px; z-index: 1; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--y); text-shadow: 0 1px 6px rgba(0,0,0,.8); }
-.proj-credit { position: absolute; bottom: 8px; right: 10px; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; color: rgba(255,255,255,.75); text-shadow: 0 1px 4px rgba(0,0,0,.9); }
-.ph { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 24px; width: 100%; opacity: .08; }
-.ph-b { background: var(--white); border-radius: 2px; height: 52px; }
-.ph-b.wide { grid-column: span 2; height: 30px; }
+.proj-credit { position: absolute; z-index: 1; bottom: 8px; right: 10px; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; color: rgba(255,255,255,.75); text-shadow: 0 1px 4px rgba(0,0,0,.9); }
 .proj-body { padding: 18px 20px 20px; }
 .proj-tag { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 10px; }
 .proj-name { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; line-height: 1.4; margin-bottom: 10px; }
