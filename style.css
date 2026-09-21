@@ -6,8 +6,10 @@
 /* ---------- Polices ---------- */
 @font-face {
   font-family: 'VCR OSD Mono';
-  src: url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/lolmaus/VCROSDMono@1.0.0/VCROSDMono.woff') format('woff');
+  src: url('VCR_OSD_MONO.woff2') format('woff2'),
+       url('VCR_OSD_MONO.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -109,7 +111,8 @@ ul, ol { list-style: none; }
 
 @media (hover: hover) and (pointer: fine) {
   #cur, #cur-ring { display: block; }
-  body, a, button, .proj-scroll { cursor: none; }
+  /* le vrai curseur n'est masqué qu'une fois le curseur personnalisé actif (classe posée par script.js) */
+  html.cur-on body, html.cur-on a, html.cur-on button, html.cur-on .proj-scroll { cursor: none; }
   /* dans la visionneuse, le vrai curseur redevient visible */
   .lightbox, .lightbox * { cursor: auto; }
   .lightbox .lb-close { cursor: pointer; }
@@ -130,7 +133,7 @@ ul, ol { list-style: none; }
   color: var(--dim); text-decoration: none; transition: color .2s;
 }
 .nav-links a:hover { color: var(--y); }
-.nav-status { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--dim); display: flex; align-items: center; gap: 7px; }
+.nav-status { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); display: flex; align-items: center; gap: 7px; }
 .blink { width: 5px; height: 5px; border-radius: 50%; background: var(--y); animation: blink 1.4s step-end infinite; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
@@ -244,12 +247,13 @@ ul, ol { list-style: none; }
 .proj-body { padding: 18px 20px 20px; }
 .proj-tag { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 10px; }
 .proj-name { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; line-height: 1.4; margin-bottom: 10px; }
-.proj-desc { font-family: var(--mono); font-size: 11px; color: var(--dim); line-height: 1.7; margin-bottom: 18px; }
+.proj-desc { font-family: var(--sans); font-size: 13px; color: var(--dim); line-height: 1.65; margin-bottom: 18px; }
 .proj-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.08); padding-top: 12px; }
 .proj-year { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--faint); }
 .proj-cta { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--y); }
 
-.scroll-hint { display: flex; align-items: center; gap: 10px; margin-top: 16px; justify-content: flex-end; }
+.scroll-hint { display: none; align-items: center; gap: 10px; margin-top: 16px; justify-content: flex-end; }
+.js .scroll-hint { display: flex; }   /* les flèches ne s'affichent que si le script tourne */
 .scroll-hint-text { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
 .scroll-hint-arrows { display: flex; gap: 6px; }
 .scroll-hint-btn {
@@ -304,7 +308,7 @@ ul, ol { list-style: none; }
 .cs-meta-item { flex: 1; padding: 20px 24px; border-right: 1px solid var(--line); }
 .cs-meta-item:last-child { border-right: 0; }
 .cs-meta-label { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--y-dim); margin-bottom: 8px; }
-.cs-meta-val { font-family: var(--mono); font-size: 12px; }
+.cs-meta-val { font-family: var(--sans); font-size: 14px; }
 
 .cs-cta { margin-bottom: 56px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 .sound-warning { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--y-dim); display: flex; align-items: center; gap: 8px; }
