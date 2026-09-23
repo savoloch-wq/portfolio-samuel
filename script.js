@@ -1,7 +1,5 @@
 /* ==========================================================================
-   Samuel Voloch Â· Portfolio Â· script partagÃ© par toutes les pages
-   Chaque module vÃ©rifie que les Ã©lÃ©ments dont il a besoin existent :
-   le mÃªme fichier sert donc pour l'accueil et pour les pages projet.
+   
    ========================================================================== */
 (() => {
   'use strict';
@@ -28,7 +26,7 @@
     setTimeout(fire, 4000);
   }
 
-  /* ---------- Curseur personnalisÃ© (souris uniquement) ---------- */
+  /* ---------- Curseur  (souris uniquement) ---------- */
   function cursor() {
     const dot = $('#cur'), ring = $('#cur-ring');
     if (!dot || !ring || !finePointer) return;
@@ -40,7 +38,7 @@
       ry += (my - ry) * 0.11;
       ring.style.left = rx + 'px';
       ring.style.top = ry + 'px';
-      // la boucle s'arrÃªte quand l'anneau a rattrapÃ© le point
+      // la boucle le point
       raf = Math.abs(mx - rx) > 0.3 || Math.abs(my - ry) > 0.3 ? requestAnimationFrame(follow) : 0;
     };
     const setVisible = (v) => { dot.style.opacity = ring.style.opacity = v ? '1' : '0'; };
