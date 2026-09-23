@@ -1,7 +1,7 @@
 /* ==========================================================================
-   Samuel Voloch · Portfolio · script partagé par toutes les pages
-   Chaque module vérifie que les éléments dont il a besoin existent :
-   le même fichier sert donc pour l'accueil et pour les pages projet.
+   Samuel Voloch Â· Portfolio Â· script partagÃ© par toutes les pages
+   Chaque module vÃ©rifie que les Ã©lÃ©ments dont il a besoin existent :
+   le mÃªme fichier sert donc pour l'accueil et pour les pages projet.
    ========================================================================== */
 (() => {
   'use strict';
@@ -15,7 +15,7 @@
 
   document.documentElement.classList.add('js');
 
-  /* ---------- Ligne de glitch (rare, coupée si mouvement réduit) ---------- */
+  /* ---------- Ligne de glitch (rare, coupÃ©e si mouvement rÃ©duit) ---------- */
   function glitch() {
     const el = $('#glitch-el');
     if (!el || reduceMotion) return;
@@ -28,7 +28,7 @@
     setTimeout(fire, 4000);
   }
 
-  /* ---------- Curseur personnalisé (souris uniquement) ---------- */
+  /* ---------- Curseur personnalisÃ© (souris uniquement) ---------- */
   function cursor() {
     const dot = $('#cur'), ring = $('#cur-ring');
     if (!dot || !ring || !finePointer) return;
@@ -40,7 +40,7 @@
       ry += (my - ry) * 0.11;
       ring.style.left = rx + 'px';
       ring.style.top = ry + 'px';
-      // la boucle s'arrête quand l'anneau a rattrapé le point
+      // la boucle s'arrÃªte quand l'anneau a rattrapÃ© le point
       raf = Math.abs(mx - rx) > 0.3 || Math.abs(my - ry) > 0.3 ? requestAnimationFrame(follow) : 0;
     };
     const setVisible = (v) => { dot.style.opacity = ring.style.opacity = v ? '1' : '0'; };
@@ -59,13 +59,13 @@
     root.addEventListener('mouseenter', () => { if (shown) setVisible(true); });
   }
 
-  /* ---------- Bouton « retour en haut » ---------- */
+  /* ---------- Bouton Â« retour en haut Â» ---------- */
   function backToTop() {
     const btn = $('#back-top');
     if (!btn) return;
     const small = matchMedia('(max-width: 768px)');
     let lastY = scrollY;
-    // Sur mobile le bouton n'apparaît qu'en remontant : il ne recouvre pas le contenu pendant la lecture.
+    // Sur mobile le bouton n'apparaÃ®t qu'en remontant : il ne recouvre pas le contenu pendant la lecture.
     const toggle = () => {
       const y = scrollY, up = y < lastY - 4;
       if (Math.abs(y - lastY) > 4) lastY = y;
@@ -80,7 +80,7 @@
     });
   }
 
-  /* ---------- Bouton « Me contacter » : masqué face à la section contact ---------- */
+  /* ---------- Bouton Â« Me contacter Â» : masquÃ© face Ã  la section contact ---------- */
   function floatContact() {
     const btn = $('#float-contact'), target = $('#contact');
     if (!btn || !target || !('IntersectionObserver' in window)) return;
@@ -89,7 +89,7 @@
     }, { threshold: 0.15 }).observe(target);
   }
 
-  /* ---------- Menu mobile : bouton « Menu » qui ouvre les liens de navigation ---------- */
+  /* ---------- Menu mobile : bouton Â« Menu Â» qui ouvre les liens de navigation ---------- */
   function navMenu() {
     const btn = $('.nav-toggle'), menu = $('#nav-menu');
     if (!btn || !menu) return;
@@ -108,7 +108,7 @@
     matchMedia('(min-width: 769px)').addEventListener('change', (e) => { if (e.matches) set(false); });
   }
 
-  /* ---------- Filtres : catégorie (UX / UI) + année ---------- */
+  /* ---------- Filtres : catÃ©gorie (UX / UI) + annÃ©e ---------- */
   function filters() {
     const bar = $('[data-filters]'), list = $('#proj-list');
     if (!bar || !list) return;
@@ -126,7 +126,7 @@
         if (!li.hidden) count++;
       });
       empty.hidden = count > 0;
-      status.textContent = count === 0 ? 'Aucun projet' : count + (count > 1 ? ' projets affichés' : ' projet affiché');
+      status.textContent = count === 0 ? 'Aucun projet' : count + (count > 1 ? ' projets affichÃ©s' : ' projet affichÃ©');
     };
 
     const select = (group, value) => {
@@ -144,15 +144,15 @@
     const reset = $('#filter-reset');
     if (reset) reset.addEventListener('click', () => { select('cat', 'all'); select('year', 'all'); });
 
-    bar.hidden = false;     // sans JavaScript, la barre de filtres reste cachée
+    bar.hidden = false;     // sans JavaScript, la barre de filtres reste cachÃ©e
     apply();
   }
 
-  /* ---------- Images : erreurs de chargement, images très hautes ---------- */
+  /* ---------- Images : erreurs de chargement, images trÃ¨s hautes ---------- */
   function images() {
-    // Les fichiers envoyés depuis un Mac ont parfois un « é » décomposé (NFD) alors que le HTML
-    // contient un « é » composé (NFC). Sur un serveur Linux, les deux ne sont pas le même nom.
-    // Si l'image échoue, on retente une fois avec l'autre forme avant d'afficher un message.
+    // Les fichiers envoyÃ©s depuis un Mac ont parfois un Â« Ã© Â» dÃ©composÃ© (NFD) alors que le HTML
+    // contient un Â« Ã© Â» composÃ© (NFC). Sur un serveur Linux, les deux ne sont pas le mÃªme nom.
+    // Si l'image Ã©choue, on retente une fois avec l'autre forme avant d'afficher un message.
     const retryOtherUnicodeForm = (img) => {
       if (img.dataset.retried) return false;
       img.dataset.retried = '1';
@@ -175,7 +175,7 @@
     const measure = (img) => {
       const fig = img.closest('.shot');
       if (!fig || !img.naturalWidth) return;
-      // une capture de page entière (ratio > 2,5) est affichée en aperçu, visible en entier au clic
+      // une capture de page entiÃ¨re (ratio > 2,5) est affichÃ©e en aperÃ§u, visible en entier au clic
       fig.classList.toggle('is-tall', img.naturalHeight / img.naturalWidth > 2.5);
     };
 
@@ -186,7 +186,7 @@
     });
   }
 
-  /* ---------- Visionneuse : clic sur une image d'étude de cas pour la voir en entier ---------- */
+  /* ---------- Visionneuse : clic sur une image d'Ã©tude de cas pour la voir en entier ---------- */
   function lightbox() {
     const figures = $$('.shot');
     if (!figures.length || typeof HTMLDialogElement === 'undefined') return;
@@ -195,7 +195,7 @@
     dlg.className = 'lightbox';
     dlg.setAttribute('aria-label', 'Image agrandie');
     dlg.innerHTML =
-      '<button type="button" class="lb-close" aria-label="Fermer l\'image">×</button>' +
+      '<button type="button" class="lb-close" aria-label="Fermer l\'image">Ã—</button>' +
       '<img class="lb-img" alt="">' +
       '<p class="lb-caption"></p>';
     document.body.appendChild(dlg);
@@ -222,7 +222,7 @@
       btn.addEventListener('click', () => open(img));
     });
 
-    dlg.addEventListener('click', (e) => { if (e.target !== caption) dlg.close(); });   // clic n'importe où = fermer
+    dlg.addEventListener('click', (e) => { if (e.target !== caption) dlg.close(); });   // clic n'importe oÃ¹ = fermer
     dlg.addEventListener('close', () => document.body.classList.remove('lb-open'));
   }
 
